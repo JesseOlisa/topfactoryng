@@ -20,7 +20,7 @@ const Category = ({
 	products,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
 	// STATES
-	const [itemsLength, setItemsLength] = useState<number>(1);
+	const [itemsLength, setItemsLength] = useState<number>(8);
 
 	if (products.length === 0) {
 		return (
@@ -44,7 +44,7 @@ const Category = ({
 			{products.length > itemsLength && (
 				<button
 					className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
-					onClick={() => setItemsLength((prev) => prev + 1)}
+					onClick={() => setItemsLength((prev) => prev + 4)}
 				>
 					See more
 				</button>
