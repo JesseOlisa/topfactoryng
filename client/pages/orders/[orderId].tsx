@@ -22,7 +22,7 @@ const Order = ({
 			<div className='flex-center h-screen flex-col gap-3 bg-white px-4'>
 				<TbShoppingCartX size={60} />
 				<div className='text-center'>
-					<p>We can't find your Order.</p>
+					<p>We cannot find your Order.</p>
 					<p>
 						Please try again or{' '}
 						<span>

@@ -83,7 +83,7 @@ export default function Home({
 						<p className='mx-auto mt-5 max-w-sm text-center tracking-wide md:max-w-md md:text-lg'>
 							Pick from our range of amazing products. Select your preferred
 							size and color. Add your item(s) to cart and proceed to checkout.
-							That's it!.
+							That is it!.
 						</p>
 					</div>
 				</section>
