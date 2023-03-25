@@ -135,7 +135,7 @@ const Product = ({ product }: ProductProps) => {
 							name='quantity'
 							id='quantity'
 							value={quantity}
-							className='w-9 rounded border border-gray-400 outline-none'
+							className='w-10 rounded border border-gray-400 px-1 outline-none'
 							onChange={(e) => setQuantity(Number(e.target.value))}
 						>
 							<option defaultValue={1}>1</option>

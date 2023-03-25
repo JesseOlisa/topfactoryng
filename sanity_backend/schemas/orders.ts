@@ -58,9 +58,21 @@ export default {
               title: 'size',
             },
             {
-              type: 'string',
               name: 'color',
               title: 'color',
+              type: 'object',
+              fields: [
+                {
+                  name: 'name',
+                  title: 'name',
+                  type: 'string',
+                },
+                {
+                  name: 'colorCode',
+                  title: 'colorCode',
+                  type: 'string',
+                },
+              ],
             },
             {
               type: 'number',

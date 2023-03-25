@@ -18,7 +18,7 @@
 }
 @layer components {
 	.product-container {
-		@apply flex flex-col items-center justify-center shadow-lg md:w-280;
+		@apply flex flex-col items-center justify-center shadow-lg xs:w-[300px] md:w-280;
 	}
 	.product-desc {
 		@apply flex w-full flex-col justify-center bg-white px-4 py-3;
