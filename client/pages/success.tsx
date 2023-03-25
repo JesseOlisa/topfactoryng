@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useStateContext } from '@/context/StateContext';
 import { BsBagCheckFill } from 'react-icons/bs';
 
-const success = () => {
+const Success = () => {
 	const { orderId } = useStateContext();
 	// console.log(typeof orderId);
 	return (
@@ -36,4 +36,4 @@ const success = () => {
 	);
 };
 
-export default success;
+export default Success;
