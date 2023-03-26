@@ -51,6 +51,8 @@ module.exports = {
 			},
 			gridTemplateColumns: {
 				280: 'repeat(auto-fit, minmax(17.5rem, max-content))',
+				250: 'repeat(auto-fit, minmax(15.625rem, max-content))',
+				200: 'repeat(auto-fit, minmax(180px, max-content))',
 			},
 			textColor: {
 				lightGray: '#F1EFEE',

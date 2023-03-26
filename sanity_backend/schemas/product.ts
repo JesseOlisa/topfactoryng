@@ -22,6 +22,14 @@ export default {
       type: 'string',
     },
     {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'name',
+      },
+    },
+    {
       name: 'colors',
       title: 'Colors',
       type: 'array',

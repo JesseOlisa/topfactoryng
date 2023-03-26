@@ -33,7 +33,7 @@ const Category = ({
 	return (
 		<div>
 			<Navbar />
-			<div className='grid w-screen grid-cols-280 justify-center gap-6 p-3 pt-24'>
+			<div className='grid w-screen grid-cols-200 justify-center gap-2 pt-24 md:grid-cols-280 md:gap-6 md:px-3'>
 				{products.slice(0, itemsLength).map((product: any, index: number) => (
 					<Product
 						product={product}
@@ -58,9 +58,7 @@ export default Category;
 export const getStaticPaths: GetStaticPaths = async () => {
 	const query = `*[_type == 'product'][].category | order(_createdAt asc)`;
 	const allCategories = await client.fetch(query);
-	const clean = allCategories.map((category: string) => {
-		return category.replace(/\s+/g, '-');
-	});
+
 	// this is used to get all the categories for the static url
 	const paths = allCategories.map((category: Params) => {
 		return {
@@ -83,6 +81,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		baseprice,
 		"imageUrl": image.asset ->url,
 		colors,
+		'slug': slug.current,
 		_id,
 	}`;
 	const products: productType[] = await client.fetch(query, category);

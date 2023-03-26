@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useStateContext } from '@/context/StateContext';
 import { sizeArrType, colorArrType, ProductProps } from '@/interfaces';
 import { sizeOptionsArr, colorCode } from '@/lib/data';
 import { urlFor } from '@/lib/client';
 
 const Product = ({ product }: ProductProps) => {
-	const { _id, name, imageUrl, baseprice, colors } = product;
+	const { _id, name, imageUrl, baseprice, colors, slug } = product;
 	// console.log(product);
 
 	const colorArrTwo = colors?.map((color) => {
@@ -105,7 +106,40 @@ const Product = ({ product }: ProductProps) => {
 	}, [product]);
 	return (
 		<div className='product-container'>
-			<div className='h-60 w-full overflow-hidden rounded-t-lg bg-productBg'>
+			<div className='w-full overflow-hidden'>
+				<Link href={`/product/${slug}`}>
+					<img
+						src={urlFor(productDetail.imageUrl)
+							.width(320)
+							.height(380)
+							.fit('max')
+							.url()}
+						alt='product'
+						style={{
+							width: '100%',
+						}}
+						className='max-w-none rounded-lg object-contain'
+					/>
+				</Link>
+				<div className='product-desc'>
+					<div className='flex w-full justify-between text-sm md:text-base'>
+						<h2>{productDetail.name}</h2>
+						<span className='text-black/80'>
+							&#x20A6;{productInfo.price.toLocaleString()}
+						</span>
+					</div>
+					<p className='text-xs text-gray-600'>{productInfo.color.name}</p>
+				</div>
+				<div className='flex-center flex-col gap-2'>
+					<button
+						className='btn-product-primary w-full'
+						onClick={() => addToCart(productInfo)}
+					>
+						Add to Cart
+					</button>
+				</div>
+			</div>
+			{/* <div className='h-60 w-full overflow-hidden rounded-t-lg bg-productBg'>
 				<img
 					src={urlFor(productDetail.imageUrl)
 						.width(480)
@@ -191,7 +225,7 @@ const Product = ({ product }: ProductProps) => {
 				<p className='my-2 text-xs italic text-gray-700/80'>
 					*prices may vary for different sizes
 				</p>
-			</div>
+			</div> */}
 		</div>
 	);
 };

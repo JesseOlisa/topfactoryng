@@ -9,7 +9,7 @@ const Layout = ({ children }: PropsWithChildren) => {
 			<Head>
 				<title>Topfactoryng</title>
 			</Head>
-			<div className='relative min-h-screen min-w-full bg-secondaryColor'>
+			<div className='relative min-h-screen min-w-full bg-white'>
 				<main>{children}</main>
 			</div>
 		</>

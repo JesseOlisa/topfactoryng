@@ -16,7 +16,7 @@ const randomImage =
 export default function Home({
 	products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	// console.log(products);
+	console.log(products);
 	return (
 		<>
 			<header>
@@ -48,9 +48,9 @@ export default function Home({
 				</section>
 
 				{/* TOP PRODUCTS SECTIONS */}
-				<section className='mt-8'>
+				<section className='bg-white pt-8'>
 					<h2 className='ml-10 text-2xl'>Top Products</h2>
-					<div className='my-8 grid w-screen grid-cols-280 justify-center gap-6 px-3'>
+					<div className='my-8 grid w-screen grid-cols-200 justify-center gap-2 md:grid-cols-280 md:gap-6  md:px-3'>
 						{products.map((product: any, index: number) => (
 							<Product
 								product={product}
@@ -172,8 +172,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	const query = `*[_type == 'product'][0...4] | order(_createdAt desc) {
 		name,
 		baseprice,
-		"imageUrl": image.asset ->url,
+		'imageUrl': image.asset ->url,
 		colors,
+		'slug': slug.current,
 		_id,
 	}`;
 	const products: productType = await client.fetch(query);

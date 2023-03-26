@@ -18,6 +18,7 @@ export type productType = {
 	_id: string;
 	name: string;
 	imageUrl: string;
+	slug: string;
 	baseprice: number;
 	colors: { name: string; colorCode: string }[];
 };
