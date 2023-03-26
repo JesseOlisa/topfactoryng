@@ -59,6 +59,13 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 
 	const reference = new Date().getTime().toString();
 
+	// BUY NOW
+	const buyNow = (product: cartType) => {
+		setCartItems([product]);
+		setTotalPrice(product.price);
+		router.push('/contact');
+	};
+
 	// CONFIRMS ORDER
 	const confirmOrder = (doc: SanityDocumentStub<orderDocType>) => {
 		client.create(doc).then((res) => {
@@ -86,6 +93,7 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 				reference,
 				contact,
 				setContact,
+				buyNow,
 			}}
 		>
 			{children}

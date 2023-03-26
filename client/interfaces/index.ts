@@ -75,4 +75,5 @@ export type ContextType = {
 	reference: string;
 	contact: contactType;
 	setContact: React.Dispatch<React.SetStateAction<contactType>>;
+	buyNow: (product: cartType) => void;
 };

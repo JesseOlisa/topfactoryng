@@ -6,9 +6,9 @@ import { useStateContext } from '@/context/StateContext';
 import { urlFor } from '@/lib/client';
 
 const ProductDetail = ({ product }: ProductProps) => {
-	const { _id, name, imageUrl, baseprice, colors, slug } = product;
+	const { _id, name, imageUrl, baseprice, colors } = product;
 
-	const { addToCart } = useStateContext();
+	const { addToCart, buyNow } = useStateContext();
 
 	const colorArrTwo = colors?.map((color) => {
 		return {
@@ -193,7 +193,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 						</button>
 						<button
 							className='btn-primary my-2 w-full'
-							onClick={() => addToCart(productInfo)}
+							onClick={() => buyNow(productInfo)}
 						>
 							Buy Now
 						</button>
