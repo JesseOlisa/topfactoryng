@@ -149,8 +149,8 @@ const ProductDetail = ({ product }: ProductProps) => {
 										key={index}
 										className={
 											color.isSelected
-												? 'border-2.5 outline-black'
-												: 'border outline-gray-700'
+												? 'border-2.5 border-black p-[0.5px]'
+												: 'border border-gray-400 p-[0.5px]'
 										}
 										style={{
 											backgroundColor: `${color.code}`,
