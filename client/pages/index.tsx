@@ -16,7 +16,7 @@ const randomImage =
 export default function Home({
 	products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	console.log(products);
+	// console.log(products);
 	return (
 		<>
 			<header>

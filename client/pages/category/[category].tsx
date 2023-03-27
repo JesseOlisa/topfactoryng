@@ -87,5 +87,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const products: productType[] = await client.fetch(query, category);
 	return {
 		props: { products },
+		revalidate: 10,
 	};
 };

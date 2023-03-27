@@ -25,6 +25,7 @@ const Success = () => {
 				<Link
 					href={`/orders/${orderId}`}
 					className='mb-2'
+					target='_blank'
 				>
 					<button className='btn-primary w-48'>View Receipt</button>
 				</Link>

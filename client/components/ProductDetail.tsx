@@ -105,10 +105,6 @@ const ProductDetail = ({ product }: ProductProps) => {
 
 	return (
 		<div className='flex-center max-w-[50rem] flex-col gap-2 rounded-lg md:pr-2 md:shadow'>
-			<div className='flex w-full justify-between px-4 py-1 text-lg font-semibold md:hidden'>
-				<h2>{name}</h2>
-				<p>&#x20A6;{productInfo.price.toLocaleString()}</p>
-			</div>
 			<div className='flex-center w-full flex-col items-center gap-3 md:flex-row md:items-start'>
 				<div className='max-w-[20rem] md:w-1/2'>
 					<img
@@ -121,7 +117,9 @@ const ProductDetail = ({ product }: ProductProps) => {
 					<div className='flex flex-col md:gap-2'>
 						<div className='flex-between py-2 px-2'>
 							<h1 className='text-xl font-semibold'>{name}</h1>
-							<p className='text-lg font-semibold'>&#x20A6;{price}</p>
+							<p className='text-xl font-semibold'>
+								&#x20A6;{productInfo.price.toLocaleString()}
+							</p>
 						</div>
 						<div className='flex w-full items-center justify-between px-2'>
 							<p className='text-lg'>In stock</p>
