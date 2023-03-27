@@ -119,7 +119,7 @@ const Order = ({
 									</div>
 									<div>
 										<p className='mb-1'>Quantity: {item.quantity}</p>
-										<p>Price: &#x20A6;{item.price}</p>
+										<p>Price: &#x20A6;{item.price.toLocaleString()}</p>
 									</div>
 								</div>
 							</div>
@@ -127,7 +127,9 @@ const Order = ({
 					</div>
 					<div className='mt-2 border-y bg-white py-5 px-4 text-right'>
 						<h3 className='font-bold'>Total:</h3>
-						<p className='text-lg font-semibold'>&#x20A6;{totalPrice}</p>
+						<p className='text-lg font-semibold'>
+							&#x20A6;{totalPrice.toLocaleString()}
+						</p>
 					</div>
 				</div>
 				<div className='mt-4 max-w-[280px] text-center text-xs text-gray-500 md:max-w-lg'>

@@ -49,7 +49,7 @@ export default function Home({
 
 				{/* TOP PRODUCTS SECTIONS */}
 				<section className='bg-white pt-8'>
-					<h2 className='ml-10 text-2xl'>Top Products</h2>
+					<h2 className='ml-4 text-2xl md:ml-10'>Top Products</h2>
 					<div className='my-8 grid w-screen grid-cols-200 justify-center gap-2 md:grid-cols-280 md:gap-6  md:px-3'>
 						{products.map((product: any, index: number) => (
 							<Product
@@ -169,7 +169,7 @@ export default function Home({
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const query = `*[_type == 'product'][0...4] | order(_createdAt desc) {
+	const query = `*[_type == 'product'] | order(_createdAt desc) [0...4]  {
 		name,
 		baseprice,
 		'imageUrl': image.asset ->url,
