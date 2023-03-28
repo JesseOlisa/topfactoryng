@@ -12,7 +12,7 @@ const Navbar = () => {
 	return (
 		<>
 			{/* // DESKTOP NAV BAR */}
-			<div className='fixed top-0 left-0 hidden w-full items-center justify-between bg-white py-6 px-5 shadow-md md:flex'>
+			<div className='fixed top-0 left-0 z-10 hidden w-full items-center justify-between bg-white py-6 px-5 shadow-md md:flex'>
 				{/* navbar logo */}
 				<h1>
 					<Link href='/'>TopFactoryng</Link>
@@ -40,7 +40,7 @@ const Navbar = () => {
 
 			{/* MOBILE NAVBAR */}
 			<div>
-				<div className='fixed top-0 left-0 flex w-full items-center justify-between bg-white py-4 px-2 shadow-md md:hidden md:py-6 md:px-5'>
+				<div className='fixed top-0 left-0 z-10 flex w-full items-center justify-between bg-white py-4 px-2 shadow-md md:hidden md:py-6 md:px-5'>
 					{/* MENU */}
 					<NavMenu
 						isNavOpen={isNavOpen}

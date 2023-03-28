@@ -12,6 +12,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { productType } from '@/interfaces';
 import Footer from '@/components/Footer';
+import Transition from '@/components/Transition';
 
 interface Params extends ParsedUrlQuery {
 	category: string;
@@ -33,23 +34,25 @@ const Category = ({
 	return (
 		<div>
 			<Navbar />
-			<div className='grid w-screen grid-cols-200 justify-center gap-2 pt-24 md:grid-cols-280 md:gap-6 md:px-3'>
-				{products.slice(0, itemsLength).map((product: any, index: number) => (
-					<Product
-						product={product}
-						key={index}
-					/>
-				))}
-			</div>
-			{products.length > itemsLength && (
-				<button
-					className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
-					onClick={() => setItemsLength((prev) => prev + 4)}
-				>
-					See more
-				</button>
-			)}
-			<Footer />
+			<Transition>
+				<div className='grid h-auto w-screen grid-cols-200 justify-center gap-2 overflow-hidden pt-24 md:grid-cols-280 md:gap-6 md:px-3'>
+					{products.slice(0, itemsLength).map((product: any, index: number) => (
+						<Product
+							product={product}
+							key={index}
+						/>
+					))}
+				</div>
+				{products.length > itemsLength && (
+					<button
+						className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
+						onClick={() => setItemsLength((prev) => prev + 4)}
+					>
+						See more
+					</button>
+				)}
+				<Footer />
+			</Transition>
 		</div>
 	);
 };
