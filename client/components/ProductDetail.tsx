@@ -130,7 +130,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 				<motion.img
 					src={urlFor(imageUrl).width(400).height(450).fit('max').url()}
 					alt='product'
-					className='h-full rounded-xl md:rounded-r-none md:object-cover'
+					className='rounded-xl md:h-full md:rounded-r-none md:object-cover'
 					initial={{ opacity: 0.5 }}
 					animate={{ opacity: 1 }}
 					transition={{
