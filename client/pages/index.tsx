@@ -9,10 +9,19 @@ import Navbar from '@/components/Navbar';
 import Product from '@/components/Product';
 import Footer from '@/components/Footer';
 import { collection } from '@/lib/data';
+import { motion } from 'framer-motion';
 
 const randomImage =
 	'https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2073&q=80';
 
+const containerVariant = {
+	animate: {
+		transition: {
+			staggerChildren: 0.5,
+			// delayChildren: 0.3,
+		},
+	},
+};
 export default function Home({
 	products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -24,7 +33,11 @@ export default function Home({
 			</header>
 
 			{/* MAIN CONTENT */}
-			<section className='hide-scrollbar pt-16 md:pt-20'>
+
+			<motion.section
+				exit={{ opacity: 0 }}
+				className='hide-scrollbar pt-16 md:pt-20'
+			>
 				{/* BANNER */}
 				<section
 					className='h-[30rem] w-full'
@@ -50,14 +63,18 @@ export default function Home({
 				{/* TOP PRODUCTS SECTIONS */}
 				<section className='bg-white pt-8'>
 					<h2 className='ml-4 text-2xl md:ml-10'>Top Products</h2>
-					<div className='my-8 grid w-screen grid-cols-200 justify-center gap-2 md:grid-cols-280 md:gap-6  md:px-3'>
+					<motion.div
+						animate='animate'
+						variants={containerVariant}
+						className='my-8 grid w-screen grid-cols-200 justify-center gap-2 md:grid-cols-280 md:gap-6  md:px-3'
+					>
 						{products.map((product: any, index: number) => (
 							<Product
 								product={product}
 								key={index}
 							/>
 						))}
-					</div>
+					</motion.div>
 				</section>
 				{/* HOW TO ORDER */}
 				<section
@@ -162,7 +179,7 @@ export default function Home({
 						))}
 					</div>
 				</section>
-			</section>
+			</motion.section>
 			<Footer />
 		</>
 	);

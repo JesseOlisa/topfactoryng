@@ -4,13 +4,12 @@ import { motion } from 'framer-motion';
 
 const Transition = ({ children }: PropsWithChildren) => (
 	<motion.div
-		initial={{ y: 10, opacity: 0.5 }}
-		animate={{ y: 0, opacity: 1 }}
-		exit={{ y: -10, opacity: 0 }}
+		initial={{ opacity: 0 }}
+		animate={{ opacity: 1 }}
+		exit={{ opacity: 0 }}
 		transition={{
-			duration: 0.23,
+			duration: 0.3,
 		}}
-		className='hide-scrollbar overflow-hidden'
 	>
 		{children}
 	</motion.div>

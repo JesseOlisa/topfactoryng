@@ -9,6 +9,8 @@ import { ParsedUrlQuery } from 'querystring';
 import ProductDetail from '@/components/ProductDetail';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { AnimatePresence, motion } from 'framer-motion';
+import Transition from '@/components/Transition';
 interface Params extends ParsedUrlQuery {
 	slug: string;
 }
@@ -18,11 +20,20 @@ const ProductInfo = ({
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
 	return (
 		<>
-			<Navbar />
-			<div className='flex-center mb-5 min-h-screen w-full pt-20 md:pt-16'>
-				<ProductDetail product={product} />
-			</div>
-			<Footer />
+			<Transition>
+				{/* <motion.div
+					initial='initial'
+					animate='animate'
+					transition={{ duration: 3 }}
+					exit={{ x: -200 }}
+				> */}
+				<Navbar />
+				<div className='flex-center mb-5 min-h-screen w-full pt-20 md:pt-16'>
+					<ProductDetail product={product} />
+				</div>
+				<Footer />
+				{/* </motion.div> */}
+			</Transition>
 		</>
 	);
 };

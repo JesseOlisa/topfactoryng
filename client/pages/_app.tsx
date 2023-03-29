@@ -8,7 +8,10 @@ import { AnimatePresence } from 'framer-motion';
 export default function App({ Component, pageProps, router }: AppProps) {
 	return (
 		<StateContext>
-			<AnimatePresence initial={false}>
+			<AnimatePresence
+				initial={false}
+				mode='wait'
+			>
 				<Layout>
 					<Toaster position='top-center' />
 					<Component
