@@ -23,7 +23,6 @@ const containerVariant = {
 	animate: {
 		transition: {
 			staggerChildren: 0.1,
-			// delayChildren: 0.3,
 		},
 	},
 };

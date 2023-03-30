@@ -16,7 +16,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 					// onExitComplete={() => window.scroll(0, 0)}
 				>
 					<Component
-						key={router.route}
+						key={router.asPath}
 						{...pageProps}
 					/>
 				</AnimatePresence>
