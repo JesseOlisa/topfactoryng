@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from 'react';
 import Head from 'next/head';
-import { motion } from 'framer-motion';
 
 const Layout = ({ children }: PropsWithChildren) => {
 	return (
@@ -8,9 +7,9 @@ const Layout = ({ children }: PropsWithChildren) => {
 			<Head>
 				<title>Topfactoryng</title>
 			</Head>
-			<div className='relative min-h-screen min-w-full bg-white'>
-				<main>{children}</main>
-			</div>
+			<main className='relative min-h-screen min-w-full bg-white'>
+				{children}
+			</main>
 		</>
 	);
 };

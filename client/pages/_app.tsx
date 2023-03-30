@@ -8,18 +8,19 @@ import { AnimatePresence } from 'framer-motion';
 export default function App({ Component, pageProps, router }: AppProps) {
 	return (
 		<StateContext>
-			<AnimatePresence
-				initial={false}
-				mode='wait'
-			>
-				<Layout>
-					<Toaster position='top-center' />
+			<Layout>
+				<Toaster position='top-center' />
+				<AnimatePresence
+					initial={false}
+					mode='wait'
+					// onExitComplete={() => window.scroll(0, 0)}
+				>
 					<Component
-						key={router.asPath}
+						key={router.route}
 						{...pageProps}
 					/>
-				</Layout>
-			</AnimatePresence>
+				</AnimatePresence>
+			</Layout>
 		</StateContext>
 	);
 }
