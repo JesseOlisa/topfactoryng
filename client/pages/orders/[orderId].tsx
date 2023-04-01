@@ -142,7 +142,6 @@ const Order = ({
 					</p>
 				</div>
 			</div>
-			<Footer />
 		</>
 	);
 };
