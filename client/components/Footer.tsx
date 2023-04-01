@@ -6,7 +6,7 @@ import Flag from '../public/assets/flagIcon.png';
 
 const Footer = () => {
 	return (
-		<div className='flex-center md:flex-between flex-col gap-5 bg-[#040406] px-5 py-12 text-white md:flex-row'>
+		<footer className='flex-center md:flex-between flex-col gap-5 bg-[#040406] px-5 py-12 text-white md:flex-row'>
 			<div className='md:flex-center flex flex-col text-center md:text-left'>
 				<div>
 					<h1 className='mb-4 text-2xl md:text-3xl'>Contact Us</h1>
@@ -40,7 +40,7 @@ const Footer = () => {
 				/>
 				<p className='text-sm text-white/75'>&copy;Topfactoryng 2023</p>
 			</div>
-		</div>
+		</footer>
 	);
 };
 

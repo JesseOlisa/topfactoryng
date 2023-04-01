@@ -7,9 +7,7 @@ const Layout = ({ children }: PropsWithChildren) => {
 			<Head>
 				<title>Topfactoryng</title>
 			</Head>
-			<main className='relative min-h-screen min-w-full bg-white'>
-				{children}
-			</main>
+			<main className='relative min-h-screen min-w-full'>{children}</main>
 		</>
 	);
 };

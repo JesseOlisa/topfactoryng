@@ -29,10 +29,6 @@ export default function Home({
 	// console.log(products);
 	return (
 		<>
-			<header>
-				<Navbar />
-			</header>
-
 			{/* MAIN CONTENT */}
 			<Transition>
 				<section className='hide-scrollbar pt-16 md:pt-20'>
@@ -179,8 +175,6 @@ export default function Home({
 					</section>
 				</section>
 			</Transition>
-
-			<Footer />
 		</>
 	);
 }

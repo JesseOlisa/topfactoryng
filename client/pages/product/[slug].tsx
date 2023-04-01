@@ -21,18 +21,10 @@ const ProductInfo = ({
 	return (
 		<>
 			<Transition>
-				{/* <motion.div
-					initial='initial'
-					animate='animate'
-					transition={{ duration: 3 }}
-					exit={{ x: -200 }}
-				> */}
-				<Navbar />
 				<div className='flex-center mb-5 min-h-screen w-full pt-20 md:pt-16'>
 					<ProductDetail product={product} />
 				</div>
 				<Footer />
-				{/* </motion.div> */}
 			</Transition>
 		</>
 	);
