@@ -14,7 +14,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 		<StateContext>
 			<Layout>
 				<Toaster position='top-center' />
-				{router.pathname === 'contact' && <Navbar />}
+				{router.pathname !== 'contact' && <Navbar />}
 				<AnimatePresence
 					initial={false}
 					mode='wait'
