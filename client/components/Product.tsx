@@ -41,7 +41,7 @@ const Product = ({ product }: ProductProps) => {
 				<Link
 					href={`/product/${slug}`}
 					className='rounded-lg'
-					scroll={false}
+					// scroll={true}
 				>
 					<motion.img
 						src={urlFor(productDetail.imageUrl)

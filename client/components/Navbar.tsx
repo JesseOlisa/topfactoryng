@@ -17,7 +17,7 @@ const Navbar = () => {
 				<h1>
 					<Link
 						href='/'
-						scroll={false}
+						// scroll={false}
 					>
 						TopFactoryng
 					</Link>
@@ -26,25 +26,25 @@ const Navbar = () => {
 				<div className='link-container flex gap-7 text-lg'>
 					<Link
 						href={`/category/tops`}
-						scroll={false}
+						// scroll={false}
 					>
 						Tops
 					</Link>
 					<Link
 						href={`/category/gowns`}
-						scroll={false}
+						// scroll={false}
 					>
 						Gowns
 					</Link>
 					<Link
 						href={`/category/two piece sets`}
-						scroll={false}
+						// scroll={false}
 					>
 						Two piece sets
 					</Link>
 					<Link
 						href={`/category/trousers & shorts`}
-						scroll={false}
+						// scroll={false}
 					>
 						Trousers & Shorts
 					</Link>

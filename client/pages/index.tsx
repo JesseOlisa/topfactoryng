@@ -19,14 +19,12 @@ const containerVariant = {
 	animate: {
 		transition: {
 			staggerChildren: 0.5,
-			// delayChildren: 0.3,
 		},
 	},
 };
 export default function Home({
 	products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	// console.log(products);
 	return (
 		<>
 			{/* MAIN CONTENT */}
@@ -157,6 +155,7 @@ export default function Home({
 									key={index}
 									href={`/category/${link.name}`}
 									className='text-center'
+									scroll={false}
 								>
 									<div
 										className='transition-bg-150 ease h-12 w-[15rem] rounded-lg bg-100 duration-300 md:hover:bg-120'

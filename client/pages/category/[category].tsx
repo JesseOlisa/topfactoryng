@@ -41,36 +41,30 @@ const Category = ({
 		);
 	}
 	return (
-		<div>
-			<Navbar />
-			<Transition>
-				<motion.div
-					initial='initial'
-					animate='animate'
-					variants={containerVariant}
-					className='grid min-h-[100vh] w-screen grid-cols-200 justify-center gap-2 overflow-hidden pt-24 md:grid-cols-280 md:gap-6 md:px-3'
+		<Transition>
+			<motion.div
+				initial='initial'
+				animate='animate'
+				variants={containerVariant}
+				className='grid min-h-[100vh] w-screen grid-cols-200 justify-center gap-2 overflow-hidden pt-24 md:grid-cols-280 md:gap-6 md:px-3'
+			>
+				{products &&
+					products.slice(0, itemsLength).map((product: any, index: number) => (
+						<Product
+							product={product}
+							key={index}
+						/>
+					))}
+			</motion.div>
+			{products.length > itemsLength && (
+				<button
+					className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
+					onClick={() => setItemsLength((prev) => prev + 4)}
 				>
-					{products &&
-						products
-							.slice(0, itemsLength)
-							.map((product: any, index: number) => (
-								<Product
-									product={product}
-									key={index}
-								/>
-							))}
-				</motion.div>
-				{products.length > itemsLength && (
-					<button
-						className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
-						onClick={() => setItemsLength((prev) => prev + 4)}
-					>
-						See more
-					</button>
-				)}
-				<Footer />
-			</Transition>
-		</div>
+					See more
+				</button>
+			)}
+		</Transition>
 	);
 };
 export default Category;
