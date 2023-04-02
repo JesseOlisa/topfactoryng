@@ -16,7 +16,6 @@ const OrderHomePage = () => {
 	};
 	return (
 		<>
-			<Navbar />
 			<div className='flex-center h-screen w-full bg-gray-50 text-center'>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<label htmlFor='search'>
@@ -33,7 +32,6 @@ const OrderHomePage = () => {
 					</label>
 				</form>
 			</div>
-			<Footer />
 		</>
 	);
 };

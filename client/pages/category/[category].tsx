@@ -22,7 +22,7 @@ interface Params extends ParsedUrlQuery {
 const containerVariant = {
 	animate: {
 		transition: {
-			staggerChildren: 0.1,
+			staggerChildren: 0.05,
 		},
 	},
 };

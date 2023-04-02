@@ -8,11 +8,11 @@ import { motion } from 'framer-motion';
 const easing: number[] = [0.6, -0.05, 0.01, 0.99];
 
 const productvariant = {
-	initial: { y: 40, opacity: 0 },
+	initial: { opacity: 0 },
 	animate: {
 		y: 0,
 		opacity: 1,
-		transition: { ease: easing, duration: 0.4 },
+		transition: { ease: 'easeInOut', duration: 0.4 },
 	},
 };
 
@@ -41,7 +41,7 @@ const Product = ({ product }: ProductProps) => {
 				<Link
 					href={`/product/${slug}`}
 					className='rounded-lg'
-					// scroll={true}
+					// scroll={false}
 				>
 					<motion.img
 						src={urlFor(productDetail.imageUrl)

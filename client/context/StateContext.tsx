@@ -6,7 +6,13 @@ import React, {
 } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { ContextType, sizeArrType, cartType, orderDocType } from '@/interfaces';
+import {
+	ContextType,
+	sizeArrType,
+	cartType,
+	orderDocType,
+	productType,
+} from '@/interfaces';
 import { sizeOptionsArr } from '@/lib/data';
 import { AiOutlineShopping } from 'react-icons/ai';
 import { client } from '@/lib/client';
@@ -53,6 +59,7 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 	const deleteFromCart = (product: cartType) => {
 		// updates the price after deleting from cart
 		setTotalPrice((prevPrice) => prevPrice - product.price);
+		// removes items from array
 		const updatedCart = cartItems.filter((item) => item._id !== product._id);
 		setCartItems(updatedCart);
 	};

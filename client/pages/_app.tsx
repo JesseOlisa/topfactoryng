@@ -7,68 +7,20 @@ import { StateContext } from '@/context/StateContext';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useScrollRestoration } from '@/hooks/useScrollRestoration';
 
 export default function App({ Component, pageProps, router }: AppProps) {
-	const scrollCache = useRef<Record<string, [number, number]>>({});
-	const activeRestorePath = useRef<string>();
+	useScrollRestoration(router);
+	const { pathname } = router;
+	const noNavLinks = ['/contact', '/success', '/orders', '/orders/[orderId]'];
+	const removeNav = noNavLinks.includes(pathname); // this removes navbar from the above links
 
-	useEffect(() => {
-		if (history.scrollRestoration !== 'manual') {
-			history.scrollRestoration = 'manual';
-		}
-		const getCurrentPath = () => location.pathname + location.search;
-		router.beforePopState(() => {
-			activeRestorePath.current = getCurrentPath();
-			return true;
-		});
-		const onComplete = () => {
-			const scrollPath = activeRestorePath.current;
-			if (!scrollPath || !(scrollPath in scrollCache.current)) {
-				window.scrollTo(0, 0);
-				return;
-			}
-			activeRestorePath.current = undefined;
-			const [scrollX, scrollY] = scrollCache.current[scrollPath];
-			window.scrollTo(scrollX, scrollY);
-
-			const delays = [10, 20, 40, 80, 160];
-			const checkAndScroll = () => {
-				if (
-					(window.scrollX === scrollX && window.scrollY === scrollY) ||
-					scrollPath !== getCurrentPath()
-				) {
-					return;
-				}
-				window.scrollTo(scrollX, scrollY);
-				const delay = delays.shift();
-				if (delay) {
-					setTimeout(checkAndScroll, delay);
-				}
-			};
-			setTimeout(checkAndScroll, delays.shift());
-		};
-		const onScroll = () => {
-			scrollCache.current[getCurrentPath()] = [window.scrollX, window.scrollY];
-		};
-		// router.events.on('routeChangeStart', () => {
-		// 	setLoading(true);
-		// });
-		router.events.on('routeChangeComplete', onComplete);
-		window.addEventListener('scroll', onScroll);
-
-		return () => {
-			// router.events.off('routeChangeStart', () => {
-			// 	setLoading(true);
-			// });
-			router.events.off('routeChangeComplete', onComplete);
-			window.removeEventListener('scroll', onScroll);
-		};
-	}, []);
 	return (
 		<StateContext>
 			<Layout>
 				<Toaster position='top-center' />
-				{router.asPath !== '/contact' && <Navbar />}
+
+				{!removeNav && <Navbar />}
 				<AnimatePresence
 					initial={false}
 					mode='wait'

@@ -5,6 +5,8 @@ import { useStateContext } from '@/context/StateContext';
 
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { TiShoppingCart } from 'react-icons/ti';
+
+import { motion, AnimatePresence } from 'framer-motion';
 const Cart = () => {
 	const {
 		showCart,
@@ -12,6 +14,7 @@ const Cart = () => {
 		cartItems,
 		deleteFromCart,
 		totalPrice,
+		setCartItems,
 		confirmOrder,
 	} = useStateContext();
 	const router = useRouter();
@@ -26,7 +29,7 @@ const Cart = () => {
 			setShowCart(false);
 		}
 	};
-
+	let cart = cartItems;
 	return (
 		<div
 			className={`${fadeanimation} absolute top-0 left-0 right-0 z-10 min-h-screen w-full bg-blackOverlay md:flex md:justify-end`}
@@ -70,45 +73,56 @@ const Cart = () => {
 							</button>
 						</div>
 						<div className='hide-scrollbar mt-4 flex h-[80%] w-full flex-col gap-2 overflow-auto scroll-smooth text-sm'>
-							{cartItems?.map((item, index) => (
-								<div
-									className='relative flex h-28 w-full gap-1 border-b border-gray-300'
-									key={index}
-								>
-									<div className='flex-center'>
-										<img
-											src={`${item.imageUrl}?w=80&h=90`}
-											alt='product'
-											className='rounded-sm'
-										/>
-									</div>
-									<div className='flex flex-1 flex-col px-1 py-3.5'>
-										<p className='font-semibold'>{item?.name}</p>
-										<div className='flex gap-2'>
-											<p>Color:</p>
-											<span
-												className='mt-0.5 h-4 w-4 rounded-full border border-gray-500'
-												style={{ backgroundColor: `${item?.color.colorCode}` }}
-											></span>
-										</div>
-
-										<p>Size: {item?.size}</p>
-										<p>Qty: {item?.quantity}</p>
-									</div>
-									<div className='px-3 py-1 font-semibold'>
-										&#x20A6;{item?.price}
-									</div>
-									<button
-										className='absolute bottom-4 right-2'
-										onClick={() => deleteFromCart(item)}
+							<AnimatePresence mode='sync'>
+								{cartItems?.map((item) => (
+									<motion.div
+										key={item._id}
+										className='relative flex h-28 w-full gap-1 border-b border-gray-300'
+										animate={{ scale: 1, opacity: 1 }}
+										exit={{ scale: 0.8, opacity: 0 }}
+										transition={{
+											type: 'spring',
+											duration: 0.5,
+											delay: 0.5,
+										}}
 									>
-										<RiDeleteBin6Line
-											size={20}
-											className='text-red-600/95'
-										/>
-									</button>
-								</div>
-							))}
+										<div className='flex-center'>
+											<img
+												src={`${item.imageUrl}?w=80&h=90`}
+												alt='product'
+												className='rounded-sm'
+											/>
+										</div>
+										<div className='flex flex-1 flex-col px-1 py-3.5'>
+											<p className='font-semibold'>{item?.name}</p>
+											<div className='flex gap-2'>
+												<p>Color:</p>
+												<span
+													className='mt-0.5 h-4 w-4 rounded-full border border-gray-500'
+													style={{
+														backgroundColor: `${item?.color.colorCode}`,
+													}}
+												></span>
+											</div>
+
+											<p>Size: {item?.size}</p>
+											<p>Qty: {item?.quantity}</p>
+										</div>
+										<div className='px-3 py-1 font-semibold'>
+											&#x20A6;{item?.price}
+										</div>
+										<button
+											className='absolute bottom-4 right-2'
+											onClick={() => deleteFromCart(item)}
+										>
+											<RiDeleteBin6Line
+												size={20}
+												className='text-red-600/95'
+											/>
+										</button>
+									</motion.div>
+								))}
+							</AnimatePresence>
 						</div>
 						<div className='absolute bottom-0 left-0 right-0 flex justify-between border-t-2 border-gray-300 bg-white py-5 px-3'>
 							<button
