@@ -18,7 +18,7 @@ const Success = () => {
 				<h1 className='mb-4 md:text-3xl'>Thank you for your Order</h1>
 				<p className='mb-1'>Your Payment was successful</p>
 				<p className='mb-1'>A receipt has been sent to your mail</p>
-				<p className='mb-1'>Estimated Delivery: 7 days</p>
+				<p className='mb-1'>Estimated Delivery: 7 working days</p>
 			</div>
 
 			<div className='flex flex-col gap-1'>

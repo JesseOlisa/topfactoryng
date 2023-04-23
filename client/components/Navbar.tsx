@@ -15,44 +15,24 @@ const Navbar = () => {
 			<div className='fixed top-0 left-0 z-10 hidden w-full items-center justify-between bg-white py-6 px-5 shadow-md md:flex'>
 				{/* navbar logo */}
 				<h1>
-					<Link
-						href='/'
-						// scroll={false}
-					>
-						TopFactoryng
-					</Link>
+					<Link href='/'>TopFactoryng</Link>
 				</h1>
 				{/* NAVLINKS */}
 				<div className='link-container flex gap-7 text-lg'>
-					<Link
-						href={`/category/tops`}
-						// scroll={false}
-					>
-						Tops
-					</Link>
-					<Link
-						href={`/category/gowns`}
-						// scroll={false}
-					>
-						Gowns
-					</Link>
-					<Link
-						href={`/category/two piece sets`}
-						// scroll={false}
-					>
-						Two piece sets
-					</Link>
-					<Link
-						href={`/category/trousers & shorts`}
-						// scroll={false}
-					>
-						Trousers & Shorts
-					</Link>
+					<Link href={`/category/tops`}>Tops</Link>
+					<Link href={`/category/gowns`}>Gowns</Link>
+					<Link href={`/category/two piece sets`}>Two piece sets</Link>
+					<Link href={`/category/trousers & shorts`}>Trousers & Shorts</Link>
 				</div>
 				{/* cart */}
 				<button
 					className='relative'
-					onClick={() => setShowCart(!showCart)}
+					onClick={() => {
+						setShowCart(!showCart);
+						if (showCart === true) {
+							document.body.style.overflow = 'hidden';
+						}
+					}}
 				>
 					<AiOutlineShopping size={30} />
 					<span className='absolute -right-2 -top-0.5 rounded-full bg-red-500 px-[6px] text-[12px] text-white'>

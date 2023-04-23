@@ -134,7 +134,7 @@ const Order = ({
 				</div>
 				<div className='mt-4 max-w-[280px] text-center text-xs text-gray-500 md:max-w-lg'>
 					<p>
-						We take at least 7 days to produce, package and dispatch all orders
+						We take at least 7 working days to produce, package and dispatch all orders
 					</p>
 					<p className='mt-2'>
 						Having any issue or challenges regarding your order, please send a
