@@ -28,7 +28,7 @@ const Contact = () => {
 		reference,
 		email: watch('email'),
 		amount: totalPrice * 100,
-		publicKey: process.env.PAYSTACK_CLIENT_SECRET as string,
+		publicKey: 'sk_live_3f04ac482e34efc28550d962f58abbe11824a023',
 	};
 
 	const initializePayment = usePaystackPayment(config);
