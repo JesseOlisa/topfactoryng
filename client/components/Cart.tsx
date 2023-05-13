@@ -95,7 +95,7 @@ const Cart = () => {
 										</div>
 										<div className='flex flex-1 flex-col px-1 py-3.5'>
 											<p className='font-semibold'>{item?.name}</p>
-											<div className='flex gap-2'>
+											{/* <div className='flex gap-2'>
 												<p>Color:</p>
 												<span
 													className='mt-0.5 h-4 w-4 rounded-full border border-gray-500'
@@ -103,7 +103,7 @@ const Cart = () => {
 														backgroundColor: `${item?.color.colorCode}`,
 													}}
 												></span>
-											</div>
+											</div> */}
 
 											<p>Size: {item?.size}</p>
 											<p>Qty: {item?.quantity}</p>
