@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useScrollRestoration } from '@/hooks/useScrollRestoration';
-// import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App({ Component, pageProps, router }: AppProps) {
 	useScrollRestoration(router);
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
 							key={router.asPath}
 							{...pageProps}
 						/>
-						{/* <Analytics /> */}
+						<Analytics />
 					</div>
 				</AnimatePresence>
 				<Footer />
