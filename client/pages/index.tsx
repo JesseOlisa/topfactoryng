@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
@@ -25,14 +25,15 @@ const containerVariant = {
 export default function Home({
 	products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+	const [showDisclamier, setShowDisclamer] = useState(true);
 	return (
 		<>
 			{/* MAIN CONTENT */}
 			<Transition>
-				<section className='hide-scrollbar pt-16 md:pt-20'>
+				<section className='hide-scrollbar relative pt-16 md:pt-20'>
 					{/* BANNER */}
 					<section
-						className='h-[30rem] w-full'
+						className='min-h-[30rem] w-full'
 						style={{
 							backgroundImage: `url(${randomImage})`,
 							backgroundRepeat: 'no-repeat',
@@ -80,7 +81,7 @@ export default function Home({
 								How we operate
 							</h2>
 							<p className='mx-auto mt-5 max-w-sm text-center tracking-wide md:max-w-md md:text-lg'>
-								Orders are taken weekly and, items are availbale only on
+								Orders are taken weekly and, items are available only on
 								pre-order as we do not have ready to wear items. To deliver
 								quality wears, we take at least 7 working days to produce,
 								package and dispatch all orders.
@@ -173,6 +174,27 @@ export default function Home({
 						</div>
 					</section>
 				</section>
+				{showDisclamier && (
+					<section className='flex-center fixed top-0 left-0 z-20 h-screen w-full bg-blackOverlayDarker px-2 md:px-0'>
+						<div className='text-align relative max-w-lg rounded bg-white px-5 py-10'>
+							<h2 className='text-center text-2xl font-bold tracking-wide underline underline-offset-2'>
+								Please Note!
+							</h2>
+							<p className='mx-auto mt-5 max-w-sm text-center tracking-wide md:max-w-md md:text-base'>
+								Orders are taken weekly and, items are available only on
+								pre-order as we do not have ready to wear items. To deliver
+								quality wears, we take at least 7 - 14 working days to produce,
+								package and dispatch all orders.
+							</p>
+							<button
+								className='mx-auto mt-3 block rounded-lg bg-red-500 px-3 py-2 text-white'
+								onClick={() => setShowDisclamer(false)}
+							>
+								Keep Shopping
+							</button>
+						</div>
+					</section>
+				)}
 			</Transition>
 		</>
 	);

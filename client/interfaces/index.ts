@@ -20,7 +20,7 @@ export type productType = {
 	imageUrl: string;
 	slug: string;
 	baseprice: number;
-	colors: { name: string; colorCode: string }[];
+	// colors: { name: string; colorCode: string }[];
 };
 export interface ProductProps {
 	product: productType;
@@ -34,7 +34,7 @@ export type cartType = {
 	imageUrl: string;
 	size: number;
 	price: number;
-	color: { name: string; colorCode: string };
+	// color: { name: string; colorCode: string };
 	quantity: any;
 };
 

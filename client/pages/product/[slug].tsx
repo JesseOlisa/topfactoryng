@@ -7,9 +7,6 @@ import {
 import { client } from '@/lib/client';
 import { ParsedUrlQuery } from 'querystring';
 import ProductDetail from '@/components/ProductDetail';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { AnimatePresence, motion } from 'framer-motion';
 import Transition from '@/components/Transition';
 interface Params extends ParsedUrlQuery {
 	slug: string;

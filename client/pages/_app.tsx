@@ -8,29 +8,30 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useScrollRestoration } from '@/hooks/useScrollRestoration';
+// import { Analytics } from '@vercel/analytics/react';
 
 export default function App({ Component, pageProps, router }: AppProps) {
 	useScrollRestoration(router);
 	const { pathname } = router;
 	const noNavLinks = ['/contact', '/success', '/orders', '/orders/[orderId]'];
-	const removeNav = noNavLinks.includes(pathname); // this removes navbar from the above links
+	const allowNavBar = noNavLinks.includes(pathname); // this checks if navbar is allowed
 
 	return (
 		<StateContext>
 			<Layout>
 				<Toaster position='top-center' />
 
-				{!removeNav && <Navbar />}
+				{!allowNavBar && <Navbar />}
 				<AnimatePresence
 					initial={false}
 					mode='wait'
-					// onExitComplete={() => window.scrollTo(0, 0)}
 				>
 					<div>
 						<Component
 							key={router.asPath}
 							{...pageProps}
 						/>
+						{/* <Analytics /> */}
 					</div>
 				</AnimatePresence>
 				<Footer />

@@ -17,7 +17,7 @@ const productvariant = {
 };
 
 const Product = ({ product }: ProductProps) => {
-	const { _id, name, imageUrl, baseprice, colors, slug } = product;
+	const { _id, name, imageUrl, baseprice, slug } = product;
 
 	const { addToCart } = useStateContext();
 
@@ -27,7 +27,7 @@ const Product = ({ product }: ProductProps) => {
 		imageUrl,
 		size: 6,
 		price: baseprice,
-		color: colors?.[0],
+		// color: colors?.[0],
 		quantity: 1,
 		_key: '',
 	};
@@ -68,7 +68,7 @@ const Product = ({ product }: ProductProps) => {
 							&#x20A6;{productDetail.price.toLocaleString()}
 						</span>
 					</div>
-					<p className='text-xs text-gray-600'>{productDetail.color.name}</p>
+					{/* <p className='text-xs text-gray-600'>{productDetail.color.name}</p> */}
 				</div>
 				<div className='flex-center flex-col gap-2'>
 					<motion.button

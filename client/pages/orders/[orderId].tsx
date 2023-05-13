@@ -113,10 +113,10 @@ const Order = ({
 									/>
 								</div>
 								<div className='flex-between flex flex-1 items-center'>
-									<div>
+									{/* <div>
 										<p>Name: {item.name}</p>
 										<p>Color: {item.color.name}</p>
-									</div>
+									</div> */}
 									<div>
 										<p className='mb-1'>Quantity: {item.quantity}</p>
 										<p>Price: &#x20A6;{item.price.toLocaleString()}</p>
@@ -134,7 +134,8 @@ const Order = ({
 				</div>
 				<div className='mt-4 max-w-[280px] text-center text-xs text-gray-500 md:max-w-lg'>
 					<p>
-						We take at least 7 working days to produce, package and dispatch all orders
+						We take at least 7 working days to produce, package and dispatch all
+						orders
 					</p>
 					<p className='mt-2'>
 						Having any issue or challenges regarding your order, please send a

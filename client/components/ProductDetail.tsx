@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { sizeArrType, colorArrType, ProductProps } from '@/interfaces';
-import { sizeOptionsArr, colorCode } from '@/lib/data';
+import { sizeOptionsArr } from '@/lib/data';
 import { useStateContext } from '@/context/StateContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { urlFor } from '@/lib/client';
 
@@ -27,22 +27,22 @@ const itemVariant = {
 };
 
 const ProductDetail = ({ product }: ProductProps) => {
-	const { _id, name, imageUrl, baseprice, colors } = product;
+	const { _id, name, imageUrl, baseprice } = product;
 
 	const { addToCart, buyNow } = useStateContext();
 
-	const colorArrTwo = colors?.map((color) => {
-		return {
-			name: color.name,
-			code: color.colorCode,
-			isSelected: false,
-		};
-	});
+	// const colorArrTwo = colors?.map((color) => {
+	// 	return {
+	// 		name: color.name,
+	// 		code: color.colorCode,
+	// 		isSelected: false,
+	// 	};
+	// });
 
 	const [sizeArr, setSizeArr] = useState<sizeArrType>(sizeOptionsArr);
 	const [quantity, setQuantity] = useState<any>(1);
 	const [selectedSize, setSelectedSize] = useState<number>(6);
-	const [colorArr, setColorArr] = useState<colorArrType>(colorArrTwo);
+	// const [colorArr, setColorArr] = useState<colorArrType>(colorArrTwo);
 
 	let price: number = baseprice;
 	// PRICE LISTING
@@ -69,7 +69,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 		imageUrl,
 		size: 6,
 		price,
-		color: colors?.[0],
+		// color: colors?.[0],
 		quantity,
 		_key: '',
 	};
@@ -97,19 +97,19 @@ const ProductDetail = ({ product }: ProductProps) => {
 		});
 	};
 
-	const updateColor = (id: number) => {
-		let newColorArr = colorArrTwo.map((opt, index) => {
-			if (id === index) {
-				setProductInfo({
-					...productInfo,
-					color: { name: opt.name, colorCode: opt.code },
-				});
-				return { ...opt, isSelected: true };
-			}
-			return { ...opt, isSelected: false };
-		});
-		setColorArr(newColorArr);
-	};
+	// const updateColor = (id: number) => {
+	// 	let newColorArr = colorArrTwo.map((opt, index) => {
+	// 		if (id === index) {
+	// 			setProductInfo({
+	// 				...productInfo,
+	// 				color: { name: opt.name, colorCode: opt.code },
+	// 			});
+	// 			return { ...opt, isSelected: true };
+	// 		}
+	// 		return { ...opt, isSelected: false };
+	// 	});
+	// 	setColorArr(newColorArr);
+	// };
 
 	// USE EFFECT
 	useEffect(() => {
@@ -140,7 +140,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 			</div>
 			<div className='flex min-h-[20rem] flex-col justify-between md:h-[26rem] md:w-[45%] md:gap-4 md:px-0'>
 				<motion.div
-					className='flex flex-col md:gap-2'
+					className='flex flex-col md:gap-3'
 					initial='initial'
 					animate='animate'
 					variants={containerVariant}
@@ -175,7 +175,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 						</div>
 					</motion.div>
 
-					<motion.div
+					{/* <motion.div
 						className='flex w-full flex-col px-2'
 						variants={itemVariant}
 					>
@@ -196,7 +196,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 								></button>
 							))}
 						</div>
-					</motion.div>
+					</motion.div> */}
 					<motion.div
 						className='mb-2 w-full'
 						variants={itemVariant}
