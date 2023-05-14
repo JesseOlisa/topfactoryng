@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { sizeArrType, colorArrType, ProductProps } from '@/interfaces';
 import { sizeOptionsArr } from '@/lib/data';
 import { useStateContext } from '@/context/StateContext';
@@ -63,16 +63,19 @@ const ProductDetail = ({ product }: ProductProps) => {
 			break;
 	}
 
-	let productDetail = {
-		_id,
-		name,
-		imageUrl,
-		size: 6,
-		price,
-		// color: colors?.[0],
-		quantity,
-		_key: '',
-	};
+	let productDetail = useMemo(
+		() => ({
+			_id,
+			name,
+			imageUrl,
+			size: 6,
+			price,
+			// color: colors?.[0],
+			quantity,
+			_key: '',
+		}),
+		[_id, name, imageUrl, price, quantity]
+	);
 
 	const [productInfo, setProductInfo] = useState(productDetail);
 
@@ -88,14 +91,14 @@ const ProductDetail = ({ product }: ProductProps) => {
 		setSizeArr(newArr);
 	};
 
-	const updatePrice = () => {
+	const updatePrice = useCallback(() => {
 		sizeArr.map((option) => {
 			if (option.isSelected) {
 				setSelectedSize(option.size);
 			}
 			return;
 		});
-	};
+	}, [sizeArr]);
 
 	// const updateColor = (id: number) => {
 	// 	let newColorArr = colorArrTwo.map((opt, index) => {
@@ -114,15 +117,15 @@ const ProductDetail = ({ product }: ProductProps) => {
 	// USE EFFECT
 	useEffect(() => {
 		updatePrice();
-	}, [sizeArr]);
+	}, [sizeArr, updatePrice]);
 	// for pricing update
 	useEffect(() => {
 		setProductInfo({ ...productInfo, quantity, price: price * quantity });
-	}, [selectedSize, quantity]);
+	}, [selectedSize, quantity, price, productInfo]);
 	// USE EFFECT
 	useEffect(() => {
 		setProductInfo(productDetail);
-	}, [product]);
+	}, [product, productDetail]);
 
 	return (
 		<motion.div className='flex-center w-full max-w-[50rem]  flex-col items-center gap-4 md:flex-row md:items-start'>

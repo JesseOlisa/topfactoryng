@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { RxCaretLeft } from 'react-icons/rx';
 import { useStateContext } from '@/context/StateContext';
@@ -87,10 +88,12 @@ const Cart = () => {
 										}}
 									>
 										<div className='flex-center'>
-											<img
-												src={`${item.imageUrl}?w=80&h=90`}
+											<Image
+												src={`${item.imageUrl}`}
 												alt='product'
 												className='rounded-sm'
+												width={80}
+												height={90}
 											/>
 										</div>
 										<div className='flex flex-1 flex-col px-1 py-3.5'>

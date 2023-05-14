@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { AiOutlineShopping } from 'react-icons/ai';
 import { useStateContext } from '@/context/StateContext';
 import Cart from './Cart';
 import NavMenu from './NavMenu';
 const Navbar = () => {
+	const router = useRouter();
 	const { showCart, setShowCart, cartItems } = useStateContext();
 	const [isNavOpen, setIsNavOpen] = useState(false);
-	// const [animation, setAnimation] = useState(false);
 
+	let activeLink = router.query.category;
 	return (
 		<>
 			{/* // DESKTOP NAV BAR */}
@@ -18,11 +20,39 @@ const Navbar = () => {
 					<Link href='/'>TopFactoryng</Link>
 				</h1>
 				{/* NAVLINKS */}
-				<div className='link-container flex gap-7 text-lg'>
-					<Link href={`/category/tops`}>Tops</Link>
-					<Link href={`/category/gowns`}>Gowns</Link>
-					<Link href={`/category/two piece sets`}>Two piece sets</Link>
-					<Link href={`/category/trousers & shorts`}>Trousers & Shorts</Link>
+				<div className='link-container flex gap-1 text-lg'>
+					<Link
+						href={`/category/tops`}
+						className={`${
+							activeLink === 'tops' ? 'font-normal' : 'font-light'
+						}`}
+					>
+						Tops
+					</Link>
+					<Link
+						href={`/category/gowns`}
+						className={`${
+							activeLink === 'gowns' ? 'font-normal' : 'font-light'
+						}`}
+					>
+						Gowns
+					</Link>
+					<Link
+						href={`/category/two piece sets`}
+						className={`${
+							activeLink === 'two piece sets' ? 'font-normal' : 'font-light'
+						}`}
+					>
+						Two piece sets
+					</Link>
+					<Link
+						href={`/category/trousers & shorts`}
+						className={`${
+							activeLink === 'trousers & shorts' ? 'font-normal' : 'font-light'
+						}`}
+					>
+						Trousers & Shorts
+					</Link>
 				</div>
 				{/* cart */}
 				<button

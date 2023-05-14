@@ -11,7 +11,6 @@ import {
 import { ParsedUrlQuery } from 'querystring';
 
 import { productType } from '@/interfaces';
-import Footer from '@/components/Footer';
 import Transition from '@/components/Transition';
 import { motion } from 'framer-motion';
 
@@ -30,7 +29,7 @@ const Category = ({
 	products,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
 	// STATES
-	const [itemsLength, setItemsLength] = useState<number>(8);
+	const [itemsLength, setItemsLength] = useState<number>(20);
 
 	if (products.length === 0) {
 		return (
@@ -46,7 +45,7 @@ const Category = ({
 				initial='initial'
 				animate='animate'
 				variants={containerVariant}
-				className='grid min-h-[100vh] w-screen grid-cols-200 justify-center gap-2 overflow-hidden pt-24 md:grid-cols-280 md:gap-6 md:px-3'
+				className='grid min-h-[100vh] w-screen grid-cols-200 justify-center gap-2 overflow-hidden py-10 pt-24 md:grid-cols-280 md:gap-6 md:px-3'
 			>
 				{products &&
 					products.slice(0, itemsLength).map((product: any, index: number) => (
@@ -59,7 +58,7 @@ const Category = ({
 			{products.length > itemsLength && (
 				<button
 					className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
-					onClick={() => setItemsLength((prev) => prev + 4)}
+					onClick={() => setItemsLength((prev) => prev + 20)}
 				>
 					See more
 				</button>

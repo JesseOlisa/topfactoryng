@@ -8,6 +8,7 @@ import { client } from '@/lib/client';
 import { ParsedUrlQuery } from 'querystring';
 import ProductDetail from '@/components/ProductDetail';
 import Transition from '@/components/Transition';
+
 interface Params extends ParsedUrlQuery {
 	slug: string;
 }
@@ -55,7 +56,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		name,
 		baseprice,
 		"imageUrl": image.asset ->url,
-		colors,
 		'slug': slug.current,
 		_id,
 	}`;

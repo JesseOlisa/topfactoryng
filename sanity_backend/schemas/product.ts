@@ -29,28 +29,6 @@ export default {
         source: 'name',
       },
     },
-    // {
-    //   name: 'colors',
-    //   title: 'Colors',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'object',
-    //       fields: [
-    //         {
-    //           type: 'string',
-    //           name: 'name',
-    //           title: 'Name',
-    //         },
-    //         {
-    //           type: 'string',
-    //           name: 'colorCode',
-    //           title: 'Color code',
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
     {
       name: 'baseprice',
       title: 'Base Price',

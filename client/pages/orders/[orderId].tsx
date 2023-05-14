@@ -1,5 +1,5 @@
-import Footer from '@/components/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 import { client, urlFor } from '@/lib/client';
 import {
 	GetStaticPaths,
@@ -100,7 +100,7 @@ const Order = ({
 								className='flex w-full gap-1 border-t pt-1  text-xs xs:text-sm md:gap-3'
 							>
 								<div>
-									<img
+									<Image
 										src={urlFor(item.imageUrl)
 											.width(50)
 											.height(50)
