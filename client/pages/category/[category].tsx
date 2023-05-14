@@ -45,7 +45,6 @@ const Category = ({
 			</div>
 		);
 	}
-	console.log(itemsLength);
 	return (
 		<Transition>
 			<motion.div
