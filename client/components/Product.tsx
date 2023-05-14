@@ -4,6 +4,7 @@ import { useStateContext } from '@/context/StateContext';
 import { ProductProps } from '@/interfaces';
 import { urlFor } from '@/lib/client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const easing: number[] = [0.6, -0.05, 0.01, 0.99];
 
@@ -27,7 +28,6 @@ const Product = ({ product }: ProductProps) => {
 		imageUrl,
 		size: 6,
 		price: baseprice,
-		// color: colors?.[0],
 		quantity: 1,
 		_key: '',
 	};
@@ -47,6 +47,7 @@ const Product = ({ product }: ProductProps) => {
 						src={urlFor(productDetail.imageUrl)
 							.width(320)
 							.height(380)
+							.sharpen(15)
 							.fit('max')
 							.url()}
 						alt='product'
@@ -58,7 +59,7 @@ const Product = ({ product }: ProductProps) => {
 						style={{
 							width: '100%',
 						}}
-						className='max-w-none rounded-lg object-contain'
+						className='max-w-none rounded-lg object-cover'
 					/>
 				</Link>
 				<div className='product-desc'>

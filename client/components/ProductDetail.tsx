@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { sizeArrType, colorArrType, ProductProps } from '@/interfaces';
+import Image from 'next/image';
+import { sizeArrType, ProductProps } from '@/interfaces';
 import { sizeOptionsArr } from '@/lib/data';
 import { useStateContext } from '@/context/StateContext';
 import { motion } from 'framer-motion';
@@ -128,20 +129,23 @@ const ProductDetail = ({ product }: ProductProps) => {
 	}, [product, productDetail]);
 
 	return (
-		<motion.div className='flex-center w-full max-w-[50rem]  flex-col items-center gap-4 md:flex-row md:items-start'>
-			<div className='max-w-[20rem] md:h-[26rem] md:w-1/2'>
-				<motion.img
-					src={urlFor(imageUrl).width(400).height(450).fit('max').url()}
+		<motion.div className='flex-center w-full max-w-[50rem] flex-col items-center gap-4 md:flex-row md:items-start'>
+			<motion.div
+				initial={{ opacity: 0.5 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.4 }}
+				className='relative h-[21rem] w-[18rem] md:h-[26rem] md:w-1/2 md:max-w-[20rem]'
+			>
+				<Image
+					src={urlFor(imageUrl).url()}
 					alt='product'
-					className='rounded-xl md:h-full md:rounded-r-none md:object-cover'
-					initial={{ opacity: 0.5 }}
-					animate={{ opacity: 1 }}
-					transition={{
-						duration: 0.3,
-					}}
+					className='rounded-xl object-cover md:h-full md:rounded-r-none'
+					fill
+					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+					priority
 				/>
-			</div>
-			<div className='flex min-h-[20rem] flex-col justify-between md:h-[26rem] md:w-[45%] md:gap-4 md:px-0'>
+			</motion.div>
+			<div className='flex min-h-[20rem] w-[18rem] flex-col justify-between md:h-[26rem] md:w-[45%] md:gap-4 md:px-0'>
 				<motion.div
 					className='flex flex-col md:gap-3'
 					initial='initial'

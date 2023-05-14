@@ -101,15 +101,12 @@ const Order = ({
 							>
 								<div>
 									<Image
-										src={urlFor(item.imageUrl)
-											.width(50)
-											.height(50)
-											.fit('max')
-											.sharpen(15)
-											.url()}
+										src={urlFor(item.imageUrl).fit('max').sharpen(15).url()}
 										alt='product'
 										className='rounded'
 										loading='lazy'
+										width={60}
+										height={50}
 									/>
 								</div>
 								<div className='flex-between flex flex-1 items-center'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Navbar from '@/components/Navbar';
 import Product from '@/components/Product';
 import { client } from '@/lib/client';
@@ -29,7 +29,13 @@ const Category = ({
 	products,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
 	// STATES
+	// let itemsLength = 20;
+
 	const [itemsLength, setItemsLength] = useState<number>(20);
+
+	let increment = useCallback(() => {
+		return setItemsLength(itemsLength + 20);
+	}, [itemsLength]);
 
 	if (products.length === 0) {
 		return (
@@ -39,6 +45,7 @@ const Category = ({
 			</div>
 		);
 	}
+	console.log(itemsLength);
 	return (
 		<Transition>
 			<motion.div
@@ -58,7 +65,7 @@ const Category = ({
 			{products.length > itemsLength && (
 				<button
 					className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
-					onClick={() => setItemsLength((prev) => prev + 20)}
+					onClick={() => increment()}
 				>
 					See more
 				</button>

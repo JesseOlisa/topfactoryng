@@ -87,9 +87,9 @@ const Cart = () => {
 											delay: 0.5,
 										}}
 									>
-										<div className='flex-center'>
+										<div className='flex-center h-[90px] w-[80px] overflow-hidden'>
 											<Image
-												src={`${item.imageUrl}`}
+												src={`${item.imageUrl}?sharp=15&fit=max`}
 												alt='product'
 												className='rounded-sm'
 												width={80}
