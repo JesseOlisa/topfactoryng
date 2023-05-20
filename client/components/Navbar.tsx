@@ -30,6 +30,14 @@ const Navbar = () => {
 						Tops
 					</Link>
 					<Link
+						href={`/category/shirt`}
+						className={`${
+							activeLink === 'shirts' ? 'font-normal' : 'font-light'
+						}`}
+					>
+						Shirts
+					</Link>
+					<Link
 						href={`/category/gowns`}
 						className={`${
 							activeLink === 'gowns' ? 'font-normal' : 'font-light'
@@ -107,6 +115,12 @@ const Navbar = () => {
 							<div className='link-container top-0 left-0 flex h-screen w-[14rem] animate-slide-in-left flex-col gap-7 bg-white px-4 pt-20 text-base'>
 								<Link
 									href={`/category/tops`}
+									onClick={() => setIsNavOpen(false)}
+								>
+									Tops
+								</Link>
+								<Link
+									href={`/category/shirt`}
 									onClick={() => setIsNavOpen(false)}
 								>
 									Tops
