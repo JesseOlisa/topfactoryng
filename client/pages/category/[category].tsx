@@ -75,14 +75,16 @@ const Category = ({
 export default Category;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const query = `*[_type == 'product'][].category | order(_createdAt asc)`;
+	const query = `*[_type == 'category']{
+		title
+	}`;
 	const allCategories = await client.fetch(query);
 
 	// this is used to get all the categories for the static url
 	const paths = allCategories.map((category: Params) => {
 		return {
 			params: {
-				category,
+				category: category.title,
 			},
 		};
 	});
@@ -95,7 +97,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const { category = '' } = context.params as Params;
-	const query = `*[_type == 'product' && category =='${category}'] {
+	const query = `*[_type == 'product' && category._ref in *[_type=="category" && title=="${category}"]._id] {
 		name,
 		baseprice,
 		"imageUrl": image.asset ->url,

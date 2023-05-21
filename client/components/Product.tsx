@@ -37,13 +37,24 @@ const Product = ({ product }: ProductProps) => {
 			variants={productvariant}
 			className='product-container'
 		>
-			<div className='w-full overflow-hidden'>
-				<Link
-					href={`/product/${slug}`}
-					className='rounded-lg'
-					// scroll={false}
-				>
-					<motion.img
+			<div className='w-full overflow-hidden rounded-t-lg'>
+				<Link href={`/product/${slug}`}>
+					<motion.div
+						whileHover={{ scale: 1.04 }}
+						transition={{
+							duration: 0.5,
+							ease: [0.43, 0.13, 0.23, 0.9],
+						}}
+						className='relative h-[220px] w-full rounded-lg md:h-[350px]'
+					>
+						<Image
+							src={urlFor(productDetail.imageUrl).url()}
+							alt='product'
+							fill
+							className='rounded-lg object-cover'
+						/>
+					</motion.div>
+					{/* <motion.img
 						src={urlFor(productDetail.imageUrl)
 							.width(320)
 							.height(380)
@@ -60,7 +71,7 @@ const Product = ({ product }: ProductProps) => {
 							width: '100%',
 						}}
 						className='max-w-none rounded-lg object-cover'
-					/>
+					/> */}
 				</Link>
 				<div className='product-desc'>
 					<div className='flex w-full justify-between text-sm md:text-base'>

@@ -123,7 +123,7 @@ const Navbar = () => {
 									href={`/category/shirt`}
 									onClick={() => setIsNavOpen(false)}
 								>
-									Tops
+									Shirts
 								</Link>
 								<Link
 									href={`/category/gowns`}
