@@ -133,7 +133,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 	// USE EFFECT
 	useEffect(() => {
 		updatePrice();
-	}, [sizeArr, updatePrice]);
+	}, [sizeArr]);
 	return (
 		<>
 			<motion.div className='flex-center w-full max-w-[50rem] flex-col items-center gap-4 md:flex-row md:items-start'>
