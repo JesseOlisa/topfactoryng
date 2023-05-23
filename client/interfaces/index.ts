@@ -62,7 +62,6 @@ export type orderDocType = {
 // CONTEXT TYPES
 export type ContextType = {
 	showCart: boolean;
-	showColorSelect: boolean;
 	setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
 	sizeArr: sizeArrType;
 	setSizeArr: React.Dispatch<React.SetStateAction<sizeArrType>>;
