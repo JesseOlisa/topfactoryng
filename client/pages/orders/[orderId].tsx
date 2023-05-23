@@ -110,10 +110,10 @@ const Order = ({
 									/>
 								</div>
 								<div className='flex-between flex flex-1 items-center'>
-									{/* <div>
+									<div>
 										<p>Name: {item.name}</p>
-										<p>Color: {item.color.name}</p>
-									</div> */}
+										<p>Color: {item.color}</p>
+									</div>
 									<div>
 										<p className='mb-1'>Quantity: {item.quantity}</p>
 										<p>Price: &#x20A6;{item.price.toLocaleString()}</p>

@@ -20,7 +20,7 @@ const Navbar = () => {
 					<Link href='/'>TopFactoryng</Link>
 				</h1>
 				{/* NAVLINKS */}
-				<div className='link-container flex gap-1 text-lg'>
+				<div className='link-container flex text-lg'>
 					<Link
 						href={`/category/tops`}
 						className={`${
@@ -61,6 +61,14 @@ const Navbar = () => {
 					>
 						Trousers & Shorts
 					</Link>
+					<Link
+						href={`/category/corporate`}
+						className={`${
+							activeLink === 'trousers & shorts' ? 'font-normal' : 'font-light'
+						}`}
+					>
+						Corporate
+					</Link>
 				</div>
 				{/* cart */}
 				<button
@@ -88,7 +96,6 @@ const Navbar = () => {
 					<NavMenu
 						isNavOpen={isNavOpen}
 						setIsNavOpen={setIsNavOpen}
-						// handleClick={handleClick}
 					/>
 					{/* navbar logo */}
 					<h1>
@@ -142,6 +149,16 @@ const Navbar = () => {
 									onClick={() => setIsNavOpen(false)}
 								>
 									Trousers & Shorts
+								</Link>
+								<Link
+									href={`/category/corporate`}
+									className={`${
+										activeLink === 'trousers & shorts'
+											? 'font-normal'
+											: 'font-light'
+									}`}
+								>
+									Corporate
 								</Link>
 							</div>
 						</div>

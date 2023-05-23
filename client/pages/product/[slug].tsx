@@ -55,7 +55,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const query = `*[_type == 'product' && slug.current =='${slug}'][0] {
 		name,
 		baseprice,
-		"imageUrl": image.asset ->url,
+		"imageUrl": image,
+		"colors": category -> colors,
 		'slug': slug.current,
 		_id,
 	}`;

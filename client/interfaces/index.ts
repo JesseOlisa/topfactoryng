@@ -20,7 +20,7 @@ export type productType = {
 	imageUrl: string;
 	slug: string;
 	baseprice: number;
-	// colors: { name: string; colorCode: string }[];
+	colors: string;
 };
 export interface ProductProps {
 	product: productType;
@@ -34,7 +34,7 @@ export type cartType = {
 	imageUrl: string;
 	size: number;
 	price: number;
-	// color: { name: string; colorCode: string };
+	color: string | null;
 	quantity: any;
 };
 
@@ -61,7 +61,8 @@ export type orderDocType = {
 
 // CONTEXT TYPES
 export type ContextType = {
-	showCart: Boolean;
+	showCart: boolean;
+	showColorSelect: boolean;
 	setShowCart: React.Dispatch<React.SetStateAction<boolean>>;
 	sizeArr: sizeArrType;
 	setSizeArr: React.Dispatch<React.SetStateAction<sizeArrType>>;

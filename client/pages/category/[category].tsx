@@ -1,17 +1,18 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import Navbar from '@/components/Navbar';
-import Product from '@/components/Product';
-import { client } from '@/lib/client';
 import {
 	GetStaticPaths,
 	GetStaticProps,
 	InferGetServerSidePropsType,
 } from 'next';
+import Navbar from '@/components/Navbar';
+import Product from '@/components/Product';
+import Transition from '@/components/Transition';
+import { client } from '@/lib/client';
+import Pagination from '@/components/Pagination';
 
 import { ParsedUrlQuery } from 'querystring';
 
 import { productType } from '@/interfaces';
-import Transition from '@/components/Transition';
 import { motion } from 'framer-motion';
 
 interface Params extends ParsedUrlQuery {
@@ -32,6 +33,19 @@ const Category = ({
 	// let itemsLength = 20;
 
 	const [itemsLength, setItemsLength] = useState<number>(20);
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 20;
+	let startIndex = useMemo(() => {
+		return (currentPage - 1) * pageSize;
+	}, [currentPage, pageSize]);
+
+	let lastIndex = useMemo(() => {
+		return startIndex + pageSize;
+	}, [startIndex, pageSize]);
+
+	const onPageChange = useCallback((page: number) => {
+		return setCurrentPage(page);
+	}, []);
 
 	let increment = useCallback(() => {
 		return setItemsLength(itemsLength + 20);
@@ -54,21 +68,29 @@ const Category = ({
 				className='grid min-h-[100vh] w-screen grid-cols-200 justify-center gap-2 overflow-hidden py-10 pt-24 md:grid-cols-280 md:gap-6 md:px-3'
 			>
 				{products &&
-					products.slice(0, itemsLength).map((product: any, index: number) => (
-						<Product
-							product={product}
-							key={index}
-						/>
-					))}
+					products
+						.slice(startIndex, lastIndex)
+						.map((product: any, index: number) => (
+							<Product
+								product={product}
+								key={index}
+							/>
+						))}
 			</motion.div>
-			{products.length > itemsLength && (
+			{/* {products.length > itemsLength && (
 				<button
 					className='mx-auto mb-4 block border-b-2 border-b-black/40 px-1 text-center text-black/70 transition-all duration-200 ease-in-out hover:border-b-black/80 hover:text-black'
 					onClick={() => increment()}
 				>
 					See more
 				</button>
-			)}
+			)} */}
+			<Pagination
+				totalItems={products.length}
+				currentPage={currentPage}
+				pageSize={pageSize}
+				onPageChange={onPageChange}
+			/>
 		</Transition>
 	);
 };
@@ -100,8 +122,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const query = `*[_type == 'product' && category._ref in *[_type=="category" && title=="${category}"]._id] {
 		name,
 		baseprice,
-		"imageUrl": image.asset ->url,
-		colors,
+		"imageUrl": image,
+		"colors": category -> colors,
 		'slug': slug.current,
 		_id,
 	}`;

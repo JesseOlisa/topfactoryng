@@ -24,7 +24,7 @@ const OrderHomePage = () => {
 							autoComplete='off'
 							{...register('search', { required: true })}
 							placeholder='Enter reference Number'
-							className='px-3 py-1 text-left outline-none'
+							className='rounded-md border border-black/70 px-3 py-1 text-left outline-none'
 						/>
 						<button className='btn-red mx-auto mt-2 block text-sm'>
 							Search

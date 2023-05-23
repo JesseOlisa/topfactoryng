@@ -26,6 +26,7 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 	const router = useRouter();
 
 	const [showCart, setShowCart] = useState(false);
+	const [showColorSelect, setShowColorSelect] = useState(true);
 	const [cartItems, setCartItems] = useState<cartType[]>([]);
 	const [sizeArr, setSizeArr] = useState<sizeArrType>(sizeOptionsArr);
 	const [totalPrice, setTotalPrice] = useState(0);
@@ -87,6 +88,7 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 		<Context.Provider
 			value={{
 				showCart,
+				showColorSelect,
 				setShowCart,
 				sizeArr,
 				setSizeArr,
