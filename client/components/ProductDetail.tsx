@@ -75,10 +75,10 @@ const ProductDetail = ({ product }: ProductProps) => {
 			size: 6,
 			price,
 			color: null,
-			quantity,
+			quantity: 1,
 			_key: '',
 		}),
-		[_id, name, imageUrl, price, quantity]
+		[_id, name, imageUrl, price]
 	);
 
 	const [productInfo, setProductInfo] = useState<cartType>(productDetail);
@@ -90,6 +90,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 		let newArr = sizeArr.map((opt, index) => {
 			if (id === index) {
 				setProductInfo({ ...productInfo, size: opt.size }); //this update size in the product info array
+				setSelectedSize(opt.size);
 				return { ...opt, isSelected: true };
 			}
 			return { ...opt, isSelected: false };
@@ -98,19 +99,13 @@ const ProductDetail = ({ product }: ProductProps) => {
 	};
 
 	// UPDATES PRICES AND QUANTITY OF PRODUCT INFO
-	const updatePrice = useCallback(() => {
-		sizeArr.map((option) => {
-			if (option.isSelected) {
-				setSelectedSize(option.size);
-			}
-			return;
-		});
+	const updatePrice = () => {
 		setProductInfo({ ...productInfo, quantity, price: price * quantity });
-	}, [sizeArr, quantity, price, productInfo]);
+	};
 
 	// UPDATES COLOR IN PRODUCT INFO
 	const updateColor = (value: string) => {
-		setProductInfo({ ...productInfo, color: value });
+		setProductInfo((prev) => ({ ...prev, color: value }));
 	};
 	// ADD ITEMS TO CART
 	const addItemToCart = (product: cartType) => {
@@ -133,7 +128,8 @@ const ProductDetail = ({ product }: ProductProps) => {
 	// USE EFFECT
 	useEffect(() => {
 		updatePrice();
-	}, [sizeArr]);
+	}, [sizeArr, quantity]);
+
 	return (
 		<>
 			<motion.div className='flex-center w-full max-w-[50rem] flex-col items-center gap-4 md:flex-row md:items-start'>
@@ -180,7 +176,13 @@ const ProductDetail = ({ product }: ProductProps) => {
 									id='quantity'
 									value={quantity}
 									className='ml-1 w-12 rounded border border-gray-400 px-1 text-base outline-none'
-									onChange={(e) => setQuantity(Number(e.target.value))}
+									onChange={(e) => {
+										setQuantity(Number(e.target.value));
+										// setProductInfo({
+										// 	...productInfo,
+										// 	quantity: e.target.value,
+										// });
+									}}
 								>
 									<option defaultValue={1}>1</option>
 									<option value={2}>2</option>
