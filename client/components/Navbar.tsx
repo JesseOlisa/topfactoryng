@@ -77,6 +77,14 @@ const Navbar = () => {
 					>
 						Silk
 					</Link>
+					<Link
+						href={`/category/Cargo wears`}
+						className={`${
+							activeLink === 'silk' ? 'font-normal' : 'font-light'
+						}`}
+					>
+						Cargo wears
+					</Link>
 				</div>
 				{/* cart */}
 				<button
@@ -169,6 +177,12 @@ const Navbar = () => {
 									onClick={() => setIsNavOpen(false)}
 								>
 									Silk
+								</Link>
+								<Link
+									href={`/category/Cargo wears`}
+									onClick={() => setIsNavOpen(false)}
+								>
+									Cargo wears
 								</Link>
 							</div>
 						</div>
