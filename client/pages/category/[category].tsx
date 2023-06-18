@@ -119,7 +119,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const { category = '' } = context.params as Params;
-	const query = `*[_type == 'product' && category._ref in *[_type=="category" && title=="${category}"]._id] {
+	const query = `*[_type == 'product' && category._ref in *[_type=="category" && title=="${category}"]._id] | order(_createdAt desc) {
 		name,
 		baseprice,
 		"imageUrl": image,

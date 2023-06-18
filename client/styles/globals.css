@@ -35,8 +35,9 @@
 	.color-options-container button {
 		@apply h-6 w-6 rounded-full transition-all duration-100 ease-in-out;
 	}
-	.link-container a {
-		@apply whitespace-nowrap rounded-lg bg-white px-3 py-1 uppercase transition duration-500 ease-in-out hover:bg-neutral-50 md:text-sm lg:text-base;
+	.link-container a,
+	.link-container button {
+		@apply whitespace-nowrap rounded-lg px-3 py-1 uppercase transition duration-500 ease-in-out hover:bg-neutral-50;
 	}
 	.receipt h3 {
 		@apply mb-1 text-sm font-semibold uppercase;
@@ -136,4 +137,9 @@ input::placeholder {
 
 .logo {
 	font-family: 'Niconne', cursive;
+}
+
+.sublinks--container {
+	display: grid;
+	grid-template-columns: fit-content(100px) fit-content(100px) 1fr;
 }

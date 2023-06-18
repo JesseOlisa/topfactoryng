@@ -1,91 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { AiOutlineShopping } from 'react-icons/ai';
 import { useStateContext } from '@/context/StateContext';
 import Cart from './Cart';
 import NavMenu from './NavMenu';
+import { client } from '@/lib/client';
+
+interface categoryType {
+	title: string;
+}
 const Navbar = () => {
 	const router = useRouter();
 	const { showCart, setShowCart, cartItems } = useStateContext();
 	const [isNavOpen, setIsNavOpen] = useState(false);
-
+	const [categories, setCategories] = useState<categoryType[]>([]);
 	let activeLink = router.query.category;
+
+	// FETCH CATEGORIES
+	const fetchCategories = async () => {
+		const query = `*[_type == 'category'] | order(_createdAt asc) {
+			title,
+		}`;
+		try {
+			const data = await client.fetch(query);
+			setCategories(data);
+		} catch (error) {
+			console.error('Error fetching categories', error);
+		}
+	};
+
+	useEffect(() => {
+		fetchCategories();
+	}, []);
+
 	return (
 		<>
 			{/* // DESKTOP NAV BAR */}
 			<div className='fixed top-0 left-0 z-10 hidden w-full items-center justify-between bg-white py-6 px-5 shadow-md md:flex'>
-				{/* navbar logo */}
-				<h1>
-					<Link href='/'>TopFactoryng</Link>
-				</h1>
-				{/* NAVLINKS */}
-				<div className='link-container flex text-lg'>
-					<Link
-						href={`/category/tops`}
-						className={`${
-							activeLink === 'tops' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Tops
-					</Link>
-					<Link
-						href={`/category/shirt`}
-						className={`${
-							activeLink === 'shirts' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Shirts
-					</Link>
-					<Link
-						href={`/category/gowns`}
-						className={`${
-							activeLink === 'gowns' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Gowns
-					</Link>
-					<Link
-						href={`/category/two piece sets`}
-						className={`${
-							activeLink === 'two piece sets' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Two piece sets
-					</Link>
-					<Link
-						href={`/category/trousers & shorts`}
-						className={`${
-							activeLink === 'trousers & shorts' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Trousers & Shorts
-					</Link>
-					<Link
-						href={`/category/corporate`}
-						className={`${
-							activeLink === 'trousers & shorts' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Corporate
-					</Link>
-					<Link
-						href={`/category/silk`}
-						className={`${
-							activeLink === 'silk' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Silk
-					</Link>
-					<Link
-						href={`/category/Cargo wears`}
-						className={`${
-							activeLink === 'silk' ? 'font-normal' : 'font-light'
-						}`}
-					>
-						Cargo wears
-					</Link>
+				<div className='flex items-center gap-x-36'>
+					{/* navbar logo */}
+					<h1>
+						<Link href='/'>TopFactoryng</Link>
+					</h1>
+					{/* NAVLINKS */}
+
+					<ul className='link-container flex items-center text-lg'>
+						<li className='rounded-lg p-1 text-base font-normal hover:!bg-gray-50'>
+							<Link href='/'>Home</Link>
+						</li>
+						<li className='group relative'>
+							<button className='text-base font-normal hover:!bg-gray-50'>
+								Categories
+							</button>
+							{/* SUBLINKS */}
+							<div className='sublinks--container invisible absolute top-8 left-3 z-10 grid gap-2 rounded-sm border bg-white py-4 text-sm shadow-md group-hover:visible'>
+								{categories.map((category, idx) => (
+									<Link
+										key={idx}
+										href={`/category/${category.title}`}
+										className={`${
+											activeLink === category.title
+												? 'font-normal underline'
+												: 'font-light hover:underline'
+										} hover:!bg-transparent`}
+									>
+										{category.title}
+									</Link>
+								))}
+							</div>
+						</li>
+					</ul>
 				</div>
+
 				{/* cart */}
 				<button
 					className='relative'
@@ -136,54 +123,17 @@ const Navbar = () => {
 							// ref={navBarRef}
 						>
 							<div className='link-container top-0 left-0 flex h-screen w-[14rem] animate-slide-in-left flex-col gap-7 bg-white px-4 pt-20 text-base'>
-								<Link
-									href={`/category/tops`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Tops
-								</Link>
-								<Link
-									href={`/category/shirt`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Shirts
-								</Link>
-								<Link
-									href={`/category/gowns`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Gowns
-								</Link>
-								<Link
-									href={`/category/two piece sets`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Two piece sets
-								</Link>
-								<Link
-									href={`/category/trousers & shorts`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Trousers & Shorts
-								</Link>
-								<Link
-									href={`/category/corporate`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Corporate
-								</Link>
-								<Link
-									href={`/category/silk`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Silk
-								</Link>
-								<Link
-									href={`/category/Cargo wears`}
-									onClick={() => setIsNavOpen(false)}
-								>
-									Cargo wears
-								</Link>
+								<span className='text-sm uppercase text-gray-700'>
+									categories
+								</span>
+								{categories.map((category, idx) => (
+									<Link
+										href={`/category/${category.title}`}
+										onClick={() => setIsNavOpen(false)}
+									>
+										{category.title}
+									</Link>
+								))}
 							</div>
 						</div>
 					)}
