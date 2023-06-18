@@ -128,6 +128,7 @@ const Navbar = () => {
 								</span>
 								{categories.map((category, idx) => (
 									<Link
+										key={idx}
 										href={`/category/${category.title}`}
 										onClick={() => setIsNavOpen(false)}
 									>
