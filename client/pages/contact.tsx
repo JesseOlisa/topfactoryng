@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { usePaystackPayment } from 'react-paystack';
 import { useStateContext } from '@/context/StateContext';
 import Transition from '@/components/Transition';
+import { PulseLoader } from 'react-spinners';
 
 type configType = {
 	reference: string;
@@ -15,7 +16,8 @@ type configType = {
 };
 
 const Contact = () => {
-	const { reference, confirmOrder, totalPrice, cartItems } = useStateContext();
+	const { reference, confirmOrder, totalPrice, cartItems, isLoading } =
+		useStateContext();
 	const {
 		handleSubmit,
 		register,
@@ -33,7 +35,7 @@ const Contact = () => {
 
 	const initializePayment = usePaystackPayment(config);
 
-	const onSubmit: SubmitHandler<contactType> = (data: contactType) => {
+	const onSubmit: SubmitHandler<contactType> = async (data: contactType) => {
 		let orderedProduct = cartItems.map((item) => {
 			item._key = uuid();
 			return item;
@@ -48,10 +50,18 @@ const Contact = () => {
 			items: orderedProduct,
 			totalPrice,
 		};
-
 		initializePayment(() => confirmOrder(doc));
 	};
 
+	if (isLoading)
+		return (
+			<div className='flex-center h-screen flex-col gap-y-3'>
+				<PulseLoader />
+				<h1>Processing Order. Do not refresh...</h1>
+			</div>
+		);
+
+	const emailRegEx = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/);
 	return (
 		<Transition>
 			<div className='flex-center -mt-3 h-screen flex-col bg-gray-50'>
@@ -86,12 +96,17 @@ const Contact = () => {
 					<label htmlFor='email'>
 						<p>Email:</p>
 						<input
-							autoComplete='off'
-							{...register('email', { required: true })}
+							{...register('email', {
+								required: 'Email is required',
+								pattern: {
+									value: emailRegEx,
+									message: 'Invalid Email Address',
+								},
+							})}
 							placeholder='example@mail.com'
 						/>
 						<p className='error-message'>
-							{errors.email && 'Email is required'}
+							{errors.email && errors.email.message}
 						</p>
 					</label>
 					<label htmlFor='address'>

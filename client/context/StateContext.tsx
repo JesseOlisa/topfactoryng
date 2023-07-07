@@ -31,6 +31,7 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [orderId, setOrderId] = useState<string>('');
 	const [contact, setContact] = useState<contactType>(contactObj);
+	const [isLoading, setIsLoading] = useState(false);
 
 	// ADD TO CART FUNCTION
 	const addToCart = (product: cartType) => {
@@ -75,13 +76,17 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 
 	// CONFIRMS ORDER
 	const confirmOrder = (doc: SanityDocumentStub<orderDocType>) => {
-		client.create(doc).then((res) => {
-			setCartItems([]);
-			setOrderId(doc.orderId);
-			setShowCart(false);
-			setTotalPrice(0);
-			router.push('/success');
-		});
+		setIsLoading(true);
+		client
+			.create(doc)
+			.then((res) => {
+				setCartItems([]);
+				setOrderId(doc.orderId);
+				setShowCart(false);
+				setTotalPrice(0);
+				router.push('/success');
+			})
+			.finally(() => setIsLoading(false));
 	};
 	return (
 		<Context.Provider
@@ -101,6 +106,7 @@ export const StateContext = ({ children }: PropsWithChildren) => {
 				contact,
 				setContact,
 				buyNow,
+				isLoading,
 			}}
 		>
 			{children}

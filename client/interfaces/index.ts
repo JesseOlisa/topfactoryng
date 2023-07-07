@@ -76,4 +76,5 @@ export type ContextType = {
 	contact: contactType;
 	setContact: React.Dispatch<React.SetStateAction<contactType>>;
 	buyNow: (product: cartType) => void;
+	isLoading: boolean;
 };
