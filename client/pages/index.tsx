@@ -25,7 +25,7 @@ const containerVariant = {
 export default function Home({
 	products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	const [showDisclamier, setShowDisclamer] = useState(true);
+	const [showDisclamier, setShowDisclamer] = useState(false);
 	return (
 		<>
 			{/* MAIN CONTENT */}

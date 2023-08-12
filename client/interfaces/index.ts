@@ -21,6 +21,7 @@ export type productType = {
 	slug: string;
 	baseprice: number;
 	colors: string;
+	category: string;
 };
 export interface ProductProps {
 	product: productType;
@@ -78,3 +79,10 @@ export type ContextType = {
 	buyNow: (product: cartType) => void;
 	isLoading: boolean;
 };
+
+export type SearchResult = {
+	name: string;
+	baseprice: string;
+	image: string;
+	slug: string;
+}[];

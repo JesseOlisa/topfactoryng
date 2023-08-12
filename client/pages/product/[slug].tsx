@@ -39,7 +39,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = allProducts.map((product: Params) => {
 		return {
 			params: {
-				slug: product.slug,
+				slug: product.slug.toString(),
 			},
 		};
 	});
@@ -58,6 +58,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		"imageUrl": image,
 		"colors": category -> colors,
 		'slug': slug.current,
+		"category": category -> title,
 		_id,
 	}`;
 	const product = await client.fetch(query, slug);

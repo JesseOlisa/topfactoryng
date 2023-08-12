@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { sizeArrType, ProductProps, cartType } from '@/interfaces';
-import { sizeOptionsArr } from '@/lib/data';
+// import { sizeOptionsArr } from '@/lib/data';
 import { useStateContext } from '@/context/StateContext';
 import { motion } from 'framer-motion';
 import { FiEdit2 } from 'react-icons/fi';
@@ -9,6 +9,7 @@ import { FiEdit2 } from 'react-icons/fi';
 import { urlFor } from '@/lib/client';
 import ColorsSelect from './ColorsSelect';
 import { toast } from 'react-hot-toast';
+import SizeSelect from './SizeSelect';
 
 const containerVariant = {
 	animate: {
@@ -31,14 +32,17 @@ const itemVariant = {
 };
 
 const ProductDetail = ({ product }: ProductProps) => {
-	const { _id, name, imageUrl, baseprice, colors } = product;
+	const { _id, name, imageUrl, baseprice, colors, category } = product;
 
 	const { addToCart, buyNow } = useStateContext();
 
-	const [sizeArr, setSizeArr] = useState<sizeArrType>(sizeOptionsArr);
+	// const [sizeArr, setSizeArr] = useState<sizeArrType>(sizeOptionsArr);
 	const [quantity, setQuantity] = useState<number>(1);
 	const [selectedSize, setSelectedSize] = useState<number>(6);
 	const [colorSelect, setColorSelect] = useState(false);
+
+	//SIZE
+	const [sizeValue, setSizeValue] = useState('6');
 
 	let price: number = baseprice;
 	// PRICE LISTING
@@ -66,6 +70,24 @@ const ProductDetail = ({ product }: ProductProps) => {
 		}));
 	}, [colors]);
 
+	const newPrice = useMemo(() => {
+		let price = baseprice;
+		if (sizeValue === '6' || sizeValue === '8') {
+			return price;
+		} else if (sizeValue === '10') {
+			return (price += 200);
+		} else if (sizeValue === '12' || sizeValue === '14' || sizeValue === '16') {
+			return (price += 500);
+		} else if (Number(sizeValue) > 16 && category !== 'tops') {
+			return (price += 700);
+		} else {
+			return (price += 500); //adds 500 to price if it is more than 16 and it's category is tops
+		}
+		return baseprice;
+	}, [sizeValue]);
+
+	// console.log(newPrice);
+
 	// INITIAL DATA FROM SANITY
 	let productDetail = useMemo(
 		() => ({
@@ -85,22 +107,27 @@ const ProductDetail = ({ product }: ProductProps) => {
 
 	// FUNCTIONS
 
-	// UPDATES SIZES
-	const updateSize = (id: number) => {
-		let newArr = sizeArr.map((opt, index) => {
-			if (id === index) {
-				setProductInfo({ ...productInfo, size: opt.size }); //this update size in the product info array
-				setSelectedSize(opt.size);
-				return { ...opt, isSelected: true };
-			}
-			return { ...opt, isSelected: false };
-		});
-		setSizeArr(newArr);
+	// // UPDATES SIZES
+	// const updateSize = (id: number) => {
+	// 	let newArr = sizeArr.map((opt, index) => {
+	// 		if (id === index) {
+	// 			setProductInfo({ ...productInfo, size: opt.size }); //this update size in the product info array
+	// 			setSelectedSize(opt.size);
+	// 			return { ...opt, isSelected: true };
+	// 		}
+	// 		return { ...opt, isSelected: false };
+	// 	});
+	// 	setSizeArr(newArr);
+	// };
+
+	const updateSizePrice = (size: any) => {
+		setSizeValue(size.value);
+		setProductInfo({ ...productInfo, size: size.value });
 	};
 
 	// UPDATES PRICES AND QUANTITY OF PRODUCT INFO
 	const updatePrice = () => {
-		setProductInfo({ ...productInfo, quantity, price: price * quantity });
+		setProductInfo({ ...productInfo, quantity, price: newPrice * quantity });
 	};
 
 	// UPDATES COLOR IN PRODUCT INFO
@@ -128,7 +155,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 	// USE EFFECT
 	useEffect(() => {
 		updatePrice();
-	}, [sizeArr, quantity]);
+	}, [sizeValue, quantity]);
 
 	return (
 		<>
@@ -169,7 +196,7 @@ const ProductDetail = ({ product }: ProductProps) => {
 							variants={itemVariant}
 						>
 							<p className='text-lg'>In stock</p>
-							<div className='flex gap-1 px-2 text-sm'>
+							<div className='flex gap-1 pl-2 text-sm'>
 								<p className='text-lg'>Qty:</p>
 								<select
 									name='quantity'
@@ -191,12 +218,12 @@ const ProductDetail = ({ product }: ProductProps) => {
 							</div>
 						</motion.div>
 						<motion.div
-							className='mb-2 w-full'
+							className='mb-2 mt-4 flex w-full items-center justify-between'
 							variants={itemVariant}
 						>
-							<p className='mt-1 px-2 text-base font-semibold'>Size</p>
-							<div className='size-options-container'>
-								{sizeArr.map((option, index) => (
+							<p className='mt-1 px-2 text-base font-semibold'>Select Size</p>
+							<div className='px-2'>
+								{/* {sizeArr.map((option, index) => (
 									<button
 										key={index}
 										className={
@@ -208,7 +235,11 @@ const ProductDetail = ({ product }: ProductProps) => {
 									>
 										{option.size}
 									</button>
-								))}
+								))} */}
+								<SizeSelect
+									value={sizeValue}
+									handleChange={updateSizePrice}
+								/>
 							</div>
 						</motion.div>
 

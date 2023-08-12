@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { AiOutlineShopping } from 'react-icons/ai';
@@ -6,6 +6,9 @@ import { useStateContext } from '@/context/StateContext';
 import Cart from './Cart';
 import NavMenu from './NavMenu';
 import { client } from '@/lib/client';
+import Search from './Search';
+import { FiSearch } from 'react-icons/fi';
+import { SearchResult } from '@/interfaces';
 
 interface categoryType {
 	title: string;
@@ -15,6 +18,9 @@ const Navbar = () => {
 	const { showCart, setShowCart, cartItems } = useStateContext();
 	const [isNavOpen, setIsNavOpen] = useState(false);
 	const [categories, setCategories] = useState<categoryType[]>([]);
+	const [isSearchOpen, setIsSearchOpen] = useState(false);
+	const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
+	const [searchText, setSearchText] = useState('');
 	let activeLink = router.query.category;
 
 	// FETCH CATEGORIES
@@ -27,6 +33,33 @@ const Navbar = () => {
 			setCategories(data);
 		} catch (error) {
 			console.error('Error fetching categories', error);
+		}
+	};
+
+	//SEARCH RESULT
+
+	const fetchResults = async (searchedTerm: string) => {
+		const query = `*[_type == 'product' && name match "${searchedTerm}*"][0..4]{
+			image,
+			  name,
+			  baseprice,
+			  'slug': slug.current,
+			}`;
+
+		try {
+			const result = await client.fetch(query);
+			setSearchResult(result);
+		} catch (error) {
+			console.log('Error fetch result', error);
+		}
+	};
+
+	const handleChange = (value: string) => {
+		setSearchText(value);
+		if (value !== '') {
+			fetchResults(value);
+		} else {
+			setSearchResult(null);
 		}
 	};
 
@@ -73,21 +106,29 @@ const Navbar = () => {
 					</ul>
 				</div>
 
-				{/* cart */}
-				<button
-					className='relative'
-					onClick={() => {
-						setShowCart(!showCart);
-						if (showCart === true) {
-							document.body.style.overflow = 'hidden';
-						}
-					}}
-				>
-					<AiOutlineShopping size={30} />
-					<span className='absolute -right-2 -top-0.5 rounded-full bg-red-500 px-[6px] text-[12px] text-white'>
-						{cartItems.length}
-					</span>
-				</button>
+				<div className='flex items-center gap-x-3'>
+					<Search
+						setSearchText={setSearchText}
+						searchResult={searchResult}
+						handleChange={handleChange}
+						searchText={searchText}
+						setSearchResult={setSearchResult}
+					/>
+					<button
+						className='relative'
+						onClick={() => {
+							setShowCart(!showCart);
+							if (showCart === true) {
+								document.body.style.overflow = 'hidden';
+							}
+						}}
+					>
+						<AiOutlineShopping size={30} />
+						<span className='absolute -right-2 -top-0.5 rounded-full bg-red-500 px-[6px] text-[12px] text-white'>
+							{cartItems.length}
+						</span>
+					</button>
+				</div>
 
 				{showCart && <Cart />}
 			</div>
@@ -95,25 +136,47 @@ const Navbar = () => {
 			{/* MOBILE NAVBAR */}
 			<div>
 				<div className='fixed top-0 left-0 z-10 flex w-full items-center justify-between bg-white py-4 px-2 shadow-md md:hidden md:py-6 md:px-5'>
-					{/* MENU */}
-					<NavMenu
-						isNavOpen={isNavOpen}
-						setIsNavOpen={setIsNavOpen}
-					/>
-					{/* navbar logo */}
-					<h1>
-						<Link href='/'>Top factory</Link>
-					</h1>
+					{isSearchOpen ? (
+						<Search
+							setIsSearchOpen={setIsSearchOpen}
+							setSearchText={setSearchText}
+							searchResult={searchResult}
+							handleChange={handleChange}
+							searchText={searchText}
+							setSearchResult={setSearchResult}
+						/>
+					) : (
+						<>
+							<div className='flex items-center gap-x-4'>
+								{/* MENU */}
+								<NavMenu
+									isNavOpen={isNavOpen}
+									setIsNavOpen={setIsNavOpen}
+								/>
+							</div>
+							{/* navbar logo */}
+							<h1>
+								<Link href='/'>Top factory</Link>
+							</h1>
+							<div className='flex items-center gap-x-4'>
+								<FiSearch
+									size={25}
+									className='font-semibold'
+									onClick={() => setIsSearchOpen(true)}
+								/>
+								<button
+									className='relative'
+									onClick={() => setShowCart(!showCart)}
+								>
+									<AiOutlineShopping size={30} />
+									<span className='absolute -right-1 top-0.5 rounded-full bg-red-500 px-[4.5px] text-[10px] text-white'>
+										{cartItems.length}
+									</span>
+								</button>
+							</div>
+						</>
+					)}
 					{/* cart */}
-					<button
-						className='relative'
-						onClick={() => setShowCart(!showCart)}
-					>
-						<AiOutlineShopping size={30} />
-						<span className='absolute -right-1 top-0.5 rounded-full bg-red-500 px-[4.5px] text-[10px] text-white'>
-							{cartItems.length}
-						</span>
-					</button>
 
 					{/* MOBILE NAV BAR*/}
 
@@ -137,6 +200,10 @@ const Navbar = () => {
 								))}
 							</div>
 						</div>
+					)}
+
+					{isSearchOpen && (
+						<div className='absolute top-16 left-0 h-[80vh] w-full animate-fade-in bg-blackOverlay'></div>
 					)}
 
 					{showCart && <Cart />}
