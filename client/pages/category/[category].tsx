@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import {
 	GetStaticPaths,
 	GetStaticProps,
@@ -15,6 +15,8 @@ import { ParsedUrlQuery } from 'querystring';
 import { productType } from '@/interfaces';
 import { motion } from 'framer-motion';
 
+import { useRouter } from 'next/router';
+
 interface Params extends ParsedUrlQuery {
 	category: string;
 }
@@ -28,28 +30,73 @@ const containerVariant = {
 };
 const Category = ({
 	products,
+	category,
 }: InferGetServerSidePropsType<typeof getStaticProps>) => {
+	const router = useRouter();
+
+	const { page } = router.query ?? 1;
+
 	// STATES
 	// let itemsLength = 20;
+	// const [data, setData] = useState(products || []);
 
 	const [itemsLength, setItemsLength] = useState<number>(20);
-	const [currentPage, setCurrentPage] = useState(1);
+	// const [currentPage, setCurrentPage] = useState(Number(page) || 1);
+	const [totalProducts, setTotalProducts] = useState<null | number>(null);
+
+	const currentPage = useMemo(() => {
+		if (page) {
+			return Number(page);
+		} else {
+			return 1;
+		}
+	}, [page]);
 	const pageSize = 20;
 	let startIndex = useMemo(() => {
 		return (currentPage - 1) * pageSize;
-	}, [currentPage, pageSize]);
+	}, [page, pageSize]);
 
 	let lastIndex = useMemo(() => {
 		return startIndex + pageSize;
 	}, [startIndex, pageSize]);
 
-	const onPageChange = useCallback((page: number) => {
-		return setCurrentPage(page);
-	}, []);
+	// const onPageChange = useCallback((page: number) => {
+	// 	return setCurrentPage(page);
+	// }, []);
 
-	let increment = useCallback(() => {
-		return setItemsLength(itemsLength + 20);
-	}, [itemsLength]);
+	// let increment = useCallback(() => {
+	// 	return setItemsLength(itemsLength + 20);
+	// }, [itemsLength]);
+	// console.log(products);
+
+	//figure out how to optimize, data fetching with sanity
+
+	// const total = async () => {
+	// 	const query = `count(*[_type == 'product' && category._ref in *[_type=="category" && title=="${category}"]._id])
+	// 	`;
+	// 	const total = await client.fetch(query);
+	// 	return setTotalProducts(total);
+	// };
+
+	// useEffect(() => {
+	// 	total();
+	// }, [category]);
+
+	// const fetchNewProducts = async (createdAt: string) => {
+	// 	const query = `*[_type == 'product' && category._ref in *[_type=="category" && title=="${category}"]._id && _createdAt < "${createdAt}"] | order(_createdAt desc)[0...20] {
+	// 		name,
+	// 		baseprice,
+	// 		"imageUrl": image,
+	// 		"colors": category -> colors,
+	// 		'slug': slug.current,
+	// 		_id,
+	// 		_createdAt,
+	// 	}`;
+
+	// 	const newData: any = await client.fetch(query, { createdAt });
+	// 	// console.log(newData);
+	// 	setData([...data, ...newData]);
+	// };
 
 	if (products.length === 0) {
 		return (
@@ -76,6 +123,14 @@ const Category = ({
 								key={index}
 							/>
 						))}
+
+				{/* fix later */}
+
+				{/* <button
+					onClick={() => fetchNewProducts(data[data.length - 1]._createdAt)}
+				>
+					Load more data
+				</button> */}
 			</motion.div>
 			{/* {products.length > itemsLength && (
 				<button
@@ -89,7 +144,7 @@ const Category = ({
 				totalItems={products.length}
 				currentPage={currentPage}
 				pageSize={pageSize}
-				onPageChange={onPageChange}
+				category={category}
 			/>
 		</Transition>
 	);
@@ -126,10 +181,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		"colors": category -> colors,
 		'slug': slug.current,
 		_id,
+		_createdAt,
 	}`;
 	const products: productType[] = await client.fetch(query, category);
 	return {
-		props: { products },
+		props: { products, category },
 		revalidate: 10,
 	};
 };

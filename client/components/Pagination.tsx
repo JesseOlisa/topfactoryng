@@ -1,19 +1,22 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 interface PaginationProps {
-	totalItems: number;
+	totalItems: number | null;
 	currentPage: number;
 	pageSize: number;
-	onPageChange: (page: number) => void;
+	category: string;
 }
 
 const Pagination = ({
 	totalItems,
 	currentPage,
 	pageSize,
-	onPageChange,
+	category,
 }: PaginationProps) => {
-	const pagesCount = Math.ceil(totalItems / pageSize);
+	const router = useRouter();
+
+	const pagesCount = totalItems ? Math.ceil(totalItems / pageSize) : 0;
 	const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 	// const activeButtonStyle =
 	return (
@@ -23,8 +26,9 @@ const Pagination = ({
 					<button
 						key={item}
 						onClick={() => {
-							window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-							onPageChange(item);
+							router.push({
+								query: { category: category, page: item },
+							});
 						}}
 						className='cursor-pointer rounded-sm px-3 text-xl font-light'
 						style={{
