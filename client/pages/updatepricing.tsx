@@ -29,7 +29,7 @@ const Updatepricing = () => {
     let oldPrice = Number(data.oldPrice);
     let newPrice = Number(data.newPrice);
     try {
-      const query = `*[_type == 'product' && baseprice == ${oldPrice} && dateTime(_updatedAt) < dateTime(now()) - 60*60*24*7]{
+      const query = `*[_type == 'product' && category->title == 'tops' && baseprice == ${oldPrice}]{
             _id,
             baseprice,
         }`;
@@ -109,3 +109,10 @@ const Updatepricing = () => {
 };
 
 export default Updatepricing;
+
+//query is below
+//query to update with date and time.
+// const query = `*[_type == 'product' &&  baseprice == ${oldPrice} && dateTime(_updatedAt) < dateTime(now()) - 60*60*24*7]{
+//   _id,
+//   baseprice,
+// }`;
