@@ -11,31 +11,31 @@ import { useScrollRestoration } from '@/hooks/useScrollRestoration';
 import { Analytics } from '@vercel/analytics/react';
 
 export default function App({ Component, pageProps, router }: AppProps) {
-	useScrollRestoration(router);
-	const { pathname } = router;
-	const noNavLinks = ['/contact', '/success', '/orders', '/orders/[orderId]'];
-	const allowNavBar = noNavLinks.includes(pathname); // this checks if navbar is allowed
+  useScrollRestoration(router);
+  const { pathname } = router;
+  const noNavLinks = ['/contact', '/success', '/orders', '/orders/[orderId]'];
+  const allowNavBar = noNavLinks.includes(pathname); // this checks if navbar is allowed
 
-	return (
-		<StateContext>
-			<Layout>
-				<Toaster position='top-center' />
+  return (
+    <StateContext>
+      <Layout>
+        <Toaster position='top-center' />
 
-				{!allowNavBar && <Navbar />}
-				<AnimatePresence
-					initial={false}
-					mode='wait'
-				>
-					<div>
-						<Component
-							key={router.asPath}
-							{...pageProps}
-						/>
-						<Analytics />
-					</div>
-				</AnimatePresence>
-				<Footer />
-			</Layout>
-		</StateContext>
-	);
+        {!allowNavBar && <Navbar />}
+        <AnimatePresence
+          initial={false}
+          mode='wait'
+        >
+          <div>
+            <Component
+              key={router.asPath}
+              {...pageProps}
+            />
+            <Analytics />
+          </div>
+        </AnimatePresence>
+        <Footer />
+      </Layout>
+    </StateContext>
+  );
 }

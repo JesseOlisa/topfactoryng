@@ -48,7 +48,7 @@ export default {
               title: 'name',
             },
             {
-              type: 'string',
+              type: 'image',
               name: 'imageUrl',
               title: 'imageUrl',
             },

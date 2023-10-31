@@ -64,6 +64,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const product = await client.fetch(query, slug);
   return {
     props: { product },
-    revalidate: 3,
+    revalidate: 1,
   };
 };
