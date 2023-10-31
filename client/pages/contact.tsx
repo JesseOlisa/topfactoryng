@@ -30,7 +30,7 @@ const Contact = () => {
     reference,
     email: watch('email'),
     amount: totalPrice * 100,
-    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_TEST_KEY as string,
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_KEY as string,
   };
 
   const initializePayment = usePaystackPayment(config);

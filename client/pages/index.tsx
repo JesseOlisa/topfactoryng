@@ -219,7 +219,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 		name,
 		baseprice,
 		'imageUrl': image.asset ->url,
-		colors,
+		'colors': category -> colors,
 		'slug': slug.current,
 		_id,
 	}`;
