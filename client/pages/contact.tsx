@@ -7,6 +7,7 @@ import { usePaystackPayment } from 'react-paystack';
 import { useStateContext } from '@/context/StateContext';
 import Transition from '@/components/Transition';
 import { PulseLoader } from 'react-spinners';
+import { useRouter } from 'next/router';
 
 type configType = {
   reference: string;
@@ -18,6 +19,7 @@ type configType = {
 const Contact = () => {
   const { reference, confirmOrder, totalPrice, cartItems, isLoading } =
     useStateContext();
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -148,7 +150,8 @@ const Contact = () => {
         </form>
 
         <Link
-          href='/'
+          href='#'
+          onClick={() => router.back()}
           className='my-2 text-sm text-gray-600 underline hover:text-black'
         >
           Cancel Order

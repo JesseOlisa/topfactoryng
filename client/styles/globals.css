@@ -6,140 +6,140 @@
 @tailwind utilities;
 
 :root {
-	--max-width: 1100px;
-	--border-radius: 12px;
-	--font-rubik: 'Rubik', sans-serif;
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --font-rubik: 'Rubik', sans-serif;
 }
 
 @layer base {
-	h1 {
-		@apply text-xl font-bold;
-	}
+  h1 {
+    @apply text-xl font-bold;
+  }
 }
 @layer components {
-	.product-container {
-		@apply flex flex-col items-center justify-center px-2 py-2  xs:w-[180px] md:w-[280px];
-	}
-	.product-desc {
-		@apply flex w-full flex-col justify-center bg-white py-3;
-	}
-	.size-options-container {
-		@apply mt-1 flex items-center justify-between gap-2;
-	}
-	.size-options-container button {
-		@apply block  w-11 rounded border py-1.5 text-sm md:w-14;
-	}
-	.color-options-container {
-		@apply mt-1 flex items-center justify-start gap-2;
-	}
-	.color-options-container button {
-		@apply h-6 w-6 rounded-full transition-all duration-100 ease-in-out;
-	}
-	.link-container a,
-	.link-container button {
-		@apply whitespace-nowrap rounded-lg px-3 py-1 uppercase transition duration-500 ease-in-out hover:bg-neutral-50;
-	}
-	.receipt h3 {
-		@apply mb-1 text-sm font-semibold uppercase;
-	}
+  .product-container {
+    @apply flex flex-col items-center justify-center px-2 py-2  xs:w-[180px] md:w-[280px];
+  }
+  .product-desc {
+    @apply flex w-full flex-col justify-center bg-white py-3;
+  }
+  .size-options-container {
+    @apply mt-1 flex items-center justify-between gap-2;
+  }
+  .size-options-container button {
+    @apply block  w-11 rounded border py-1.5 text-sm md:w-14;
+  }
+  .color-options-container {
+    @apply mt-1 flex items-center justify-start gap-2;
+  }
+  .color-options-container button {
+    @apply h-6 w-6 rounded-full transition-all duration-100 ease-in-out;
+  }
+  .link-container a,
+  .link-container button {
+    @apply whitespace-nowrap rounded-lg px-3 py-1 uppercase transition duration-500 ease-in-out hover:bg-neutral-50;
+  }
+  .receipt h3 {
+    @apply mb-1 text-sm font-semibold uppercase;
+  }
 
-	/* BUTTONS */
-	.btn-primary {
-		@apply block rounded bg-black py-2 px-1 text-base text-white transition duration-300 ease-in-out hover:bg-opacity-90;
-	}
-	.btn-product-primary {
-		@apply block  bg-black py-2 px-1 text-sm text-white transition duration-100 ease-in-out hover:bg-opacity-90;
-	}
-	.btn-secondary {
-		@apply block border-2 border-black bg-white py-1 px-1 text-sm text-black transition duration-100 ease-in-out hover:bg-gray-50 hover:text-black;
-	}
-	.btn-red {
-		@apply block rounded bg-red-500 p-2 text-base text-white transition duration-300 ease-in-out hover:bg-red-600;
-	}
+  /* BUTTONS */
+  .btn-primary {
+    @apply block rounded bg-black py-2 px-1 text-base text-white transition duration-300 ease-in-out hover:bg-opacity-90;
+  }
+  .btn-product-primary {
+    @apply block  bg-black py-2 px-1 text-sm text-white transition duration-100 ease-in-out hover:bg-opacity-90;
+  }
+  .btn-secondary {
+    @apply block border-2 border-black bg-white py-1 px-1 text-sm text-black transition duration-100 ease-in-out hover:bg-gray-50 hover:text-black;
+  }
+  .btn-red {
+    @apply block rounded bg-red-500 p-2 text-base text-white transition duration-300 ease-in-out hover:bg-red-600;
+  }
 
-	/* general */
-	.flex-center {
-		@apply flex items-center justify-center;
-	}
-	.flex-between {
-		@apply flex  justify-between;
-	}
+  /* general */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .flex-between {
+    @apply flex  justify-between;
+  }
 
-	/* FORM CSS */
-	.form-container label {
-		@apply mb-2.5 block;
-	}
-	.form-container input {
-		@apply mb-1 w-full rounded border border-gray-500 px-2 py-[6px] text-[15px] text-gray-800 outline-none placeholder:text-sm focus:border-[1.5px] focus:border-gray-600;
-	}
-	.form-container p {
-		@apply mb-1 text-sm text-gray-600;
-	}
-	.form-container .error-message {
-		@apply mb-0 text-xs italic text-red-500;
-	}
+  /* FORM CSS */
+  .form-container label {
+    @apply mb-2.5 block;
+  }
+  .form-container input {
+    @apply mb-1 w-full rounded border border-gray-500 px-2 py-[6px] text-[15px] text-gray-800 outline-none placeholder:text-sm focus:border-[1.5px] focus:border-gray-600;
+  }
+  .form-container p {
+    @apply mb-1 text-sm text-gray-600;
+  }
+  .form-container .error-message {
+    @apply mb-0 text-xs italic text-red-500;
+  }
 
-	.fyi div {
-		@apply max-w-sm border-2 border-red-600 text-justify;
-	}
-	.fyi h2 {
-		@apply text-lg font-light uppercase;
-	}
+  .fyi div {
+    @apply max-w-sm border-2 border-red-600 text-justify;
+  }
+  .fyi h2 {
+    @apply text-lg font-light uppercase;
+  }
 
-	/* TABLE */
-	table th {
-		@apply px-6 py-3;
-	}
-	table tbody tr {
-		@apply border-b border-gray-900 bg-white;
-	}
-	table td {
-		@apply px-6 py-4;
-	}
+  /* TABLE */
+  table th {
+    @apply px-6 py-3;
+  }
+  table tbody tr {
+    @apply border-b border-gray-900 bg-white;
+  }
+  table td {
+    @apply px-6 py-4;
+  }
 }
 * {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html,
 body {
-	max-width: 100vw;
-	overflow-x: hidden;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
-	font-family: var(--font-rubik);
-	font-weight: 400;
-	color: #1b1212;
-	font-size: 1rem;
+  font-family: var(--font-rubik);
+  font-weight: 400;
+  color: #1b1212;
+  font-size: 1rem;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 input::placeholder {
-	font-style: italic;
+  font-style: italic;
 }
 
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
 .hide-scrollbar::-webkit-scrollbar {
-	display: none !important;
+  display: none !important;
 }
 
 /* For IE, Edge and Firefox */
 .hide-scrollbar {
-	-ms-overflow-style: none !important; /* IE and Edge */
-	scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
 }
 
 .logo {
-	font-family: 'Niconne', cursive;
+  font-family: 'Niconne', cursive;
 }
 
 .sublinks--container {
-	display: grid;
-	grid-template-columns: fit-content(100px) fit-content(100px) 1fr;
+  display: grid;
+  grid-template-columns: fit-content(100px) fit-content(100px) 1fr;
 }
