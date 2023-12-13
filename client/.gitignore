@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+.yarn/install-state.gz
 
 # testing
 /coverage
@@ -11,8 +12,6 @@
 # next.js
 /.next/
 /out/
-
-updatepricing
 
 # production
 /build
@@ -25,10 +24,11 @@ updatepricing
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
 
 # local env files
 .env*.local
+/.env
+
 # vercel
 .vercel
 
